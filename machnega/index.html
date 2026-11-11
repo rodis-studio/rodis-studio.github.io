@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth overflow-x-hidden">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MACHNEGA INVEST & HUB — Financement Participatif, Agro-Industrie & Services | Lomé</title>
+  <meta name="description" content="Portail officiel de la communauté Machnega (+228 91 91 36 23) : Programme Reactor & Upline, Managbe Groupe (Cacao, Hévéa, Anacarde), CDM Trans et CDM Capital Africa Award.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            syne: ['Syne', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            serif: ['Instrument Serif', 'serif'],
+          },
+          colors: {
+            midnight: {
+              950: '#040814',
+              900: '#060D1E',
+              800: '#0B1631',
+              700: '#12224A',
+            },
+            gold: {
+              400: '#FBBF24',
+              500: '#F59E0B',
+              600: '#D97706',
+            },
+            agro: {
+              400: '#34D399',
+              500: '#10B981',
+              600: '#059669',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      background-color: #040814;
+      color: #F8FAFC;
+    }
+    .hero-title-clamp {
+      font-size: clamp(2.1rem, 6.2vw, 4.25rem);
+      line-height: 1.04;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .section-title-clamp {
+      font-size: clamp(1.65rem, 4.5vw, 2.85rem);
+      line-height: 1.1;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .hero-mesh {
+      background:
+        linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        radial-gradient(circle at 80% 25%, rgba(245, 158, 11, 0.16) 0%, rgba(16, 185, 129, 0.1) 35%, rgba(6, 13, 30, 0.95) 75%, #040814 100%);
+      background-size: 44px 44px, 44px 44px, 100% 100%;
+    }
+    .glass-card {
+      background: rgba(11, 22, 49, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.25s ease;
+    }
+    .glass-card:hover {
+      border-color: rgba(245, 158, 11, 0.45);
+      box-shadow: 0 16px 40px -12px rgba(245, 158, 11, 0.18);
+    }
+    .tier-active {
+      border-color: #F59E0B !important;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.18) 0%, rgba(11, 22, 49, 0.9) 100%) !important;
+      box-shadow: 0 0 28px rgba(245, 158, 11, 0.25);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-gold-500 selection:text-midnight-950">
+
+  <!-- BANDEAU D'ALERTE PALIER EN HAUT -->
+  <div class="bg-gradient-to-r from-amber-600 via-gold-500 to-amber-600 text-midnight-950 px-4 py-2 text-xs sm:text-sm font-extrabold text-center">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2">
+      <span class="inline-flex items-center gap-1 bg-midnight-950 text-gold-400 px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-wider">
+        <i data-lucide="clock" class="w-3.5 h-3.5"></i> Palier #1 Actif
+      </span>
+      <span>Collecte UPLINE / REACTOR (Managbe Group) : <strong>50 000 FCFA</strong> jusqu'au 15 novembre 2026 (puis passage à 60 000 FCFA)</span>
+      <a href="#simulateur-upline" class="underline font-black ml-1">Réserver ma part →</a>
+    </div>
+  </div>
+
+  <!-- HEADER FIXE -->
+  <header class="sticky top-0 z-40 bg-midnight-950/90 backdrop-blur-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
+      <!-- Identité Machnega -->
+      <a href="#accueil" class="flex items-center gap-3 min-w-0">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-gold-400 to-amber-600 flex items-center justify-center font-syne font-extrabold text-midnight-950 text-base shrink-0 shadow-lg shadow-gold-500/25">
+          MG
+        </div>
+        <div class="min-w-0">
+          <span class="font-syne font-extrabold text-base sm:text-lg tracking-tight text-white block truncate">
+            MACHNEGA <span class="text-gold-400">HUB</span>
+          </span>
+          <span class="text-[11px] text-slate-400 block truncate">Finance • Formation • Agro-Industrie</span>
+        </div>
+      </a>
+
+      <!-- Navigation Desktop -->
+      <nav class="hidden lg:flex items-center gap-1 xl:gap-2 text-xs xl:text-sm font-semibold text-slate-300">
+        <a href="#simulateur-upline" class="px-3.5 py-1.5 rounded-lg bg-gold-500/15 border border-gold-500/50 text-gold-400 hover:bg-gold-500/25 transition">
+          Souscription Upline
+        </a>
+        <a href="#projets-russes" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/5 transition">Reactor & MLC</a>
+        <a href="#managbe-agro" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/5 transition">Managbe Agro</a>
+        <a href="#cdm-ecosystem" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/5 transition">CDM Trans & Gala</a>
+        <a href="#contact" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-white/5 transition">Contact</a>
+      </nav>
+
+      <!-- Actions Droite -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="openCartDrawer()" class="relative bg-midnight-800 hover:bg-midnight-700 border border-gold-500/40 text-white font-bold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl flex items-center gap-2 transition">
+          <i data-lucide="briefcase" class="w-4 h-4 text-gold-400"></i>
+          <span class="hidden sm:inline">Dossier</span>
+          <span id="cart-count-badge" class="bg-gold-500 text-midnight-950 font-extrabold text-xs px-2 py-0.5 rounded-full">0</span>
+        </button>
+        <button onclick="toggleMobileNav()" class="lg:hidden p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-200" aria-label="Menu">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menu Mobile -->
+    <div id="mobile-nav" class="hidden lg:hidden bg-midnight-900 border-b border-white/10 px-4 pt-2 pb-5 space-y-2 text-sm font-semibold">
+      <a href="#simulateur-upline" onclick="toggleMobileNav()" class="block px-3 py-2 rounded-lg bg-gold-500/15 border border-gold-500/40 text-gold-400">Souscription Upline (50 000 FCFA)</a>
+      <a href="#projets-russes" onclick="toggleMobileNav()" class="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/5">Projets Russes (Reactor, Sintezmet, MLC)</a>
+      <a href="#managbe-agro" onclick="toggleMobileNav()" class="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/5">Managbe Groupe (Cacao, Hévéa, Anacarde)</a>
+      <a href="#cdm-ecosystem" onclick="toggleMobileNav()" class="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/5">CDM Trans & Gala Agora Senghor</a>
+      <a href="#contact" onclick="toggleMobileNav()" class="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/5">Contact Direct WhatsApp</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================================= -->
+    <!-- SECTION 1 : HERO & COMPTE À REBOURS DES PALIERS           -->
+    <!-- ========================================================= -->
+    <section id="accueil" class="hero-mesh relative border-b border-white/10 pt-10 pb-16 lg:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Colonne Gauche (7 cols) -->
+          <div class="lg:col-span-7 min-w-0 space-y-6">
+            <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-gold-500/35 text-xs font-bold text-gold-400">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span>PORTAIL OFFICIEL DES INVESTISSEURS & PARTENAIRES • OUVERT 24H/24</span>
+            </div>
+
+            <h1 class="font-syne font-extrabold text-white hero-title-clamp">
+              Structurez vos participations dans les <span class="text-gold-400">projets d'avenir.</span>
+            </h1>
+
+            <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+              Bienvenue sur le hub centralisé de <strong class="text-white">Machnega</strong>. Accédez sans perte d'information aux programmes technologiques internationaux (<strong class="text-white">REACTOR, SINTEZMET, MLC Health</strong>), à l'agro-industrie durable (<strong class="text-white">MANAGBE GROUPE</strong>) et à l'écosystème <strong class="text-white">CDM</strong>.
+            </p>
+
+            <!-- Boutons d'action -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+              <a href="#simulateur-upline" class="w-full sm:w-auto max-w-full bg-gradient-to-r from-gold-500 to-amber-500 hover:from-gold-400 hover:to-amber-400 text-midnight-950 font-syne font-extrabold text-sm px-6 py-4 rounded-xl flex items-center justify-center gap-2 shadow-xl shadow-gold-500/20 transition">
+                <span>Souscrire au Programme UPLINE</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+              <a href="#managbe-agro" class="w-full sm:w-auto max-w-full bg-midnight-800 hover:bg-midnight-700 border border-agro-500/40 text-agro-400 font-bold text-sm px-6 py-4 rounded-xl flex items-center justify-center gap-2 transition">
+                <i data-lucide="sprout" class="w-4 h-4"></i>
+                <span>Pôle Cacao, Hévéa & Anacarde (699 membres)</span>
+              </a>
+            </div>
+
+            <!-- Statistiques Communauté -->
+            <div class="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-white/10">
+              <div class="min-w-0">
+                <p class="font-syne font-extrabold text-2xl sm:text-3xl text-white">699+</p>
+                <p class="text-xs text-slate-400 mt-0.5">Membres MGROUP Agro</p>
+              </div>
+              <div class="min-w-0">
+                <p class="font-syne font-extrabold text-2xl sm:text-3xl text-gold-400">50 000 F</p>
+                <p class="text-xs text-slate-400 mt-0.5">Ticket Upline jusqu'au 15 nov.</p>
+              </div>
+              <div class="min-w-0">
+                <p class="font-syne font-extrabold text-2xl sm:text-3xl text-agro-400">Dim. 19h55</p>
+                <p class="text-xs text-slate-400 mt-0.5">Conférence Google Meet</p>
+              </div>
+              <div class="min-w-0">
+                <p class="font-syne font-extrabold text-2xl sm:text-3xl text-white">24h/24</p>
+                <p class="text-xs text-slate-400 mt-0.5">Accompagnement WhatsApp</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Colonne Droite (5 cols) : Carte Urgence Paliers UPLINE / REACTOR -->
+          <div class="lg:col-span-5 min-w-0">
+            <div class="glass-card rounded-3xl p-6 sm:p-7 border-2 border-gold-500/40 relative overflow-hidden">
+              <div class="flex items-center justify-between gap-2 pb-4 border-b border-white/10">
+                <div>
+                  <span class="text-[11px] font-extrabold uppercase tracking-widest text-gold-400 block">COLLECTE MANAGBEGROUP</span>
+                  <h2 class="font-syne font-extrabold text-xl text-white mt-0.5">Compte REACTOR • UPLINES</h2>
+                </div>
+                <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                  Ouvert
+                </span>
+              </div>
+
+              <!-- Compte à rebours avant le 15 novembre 2026 -->
+              <div class="my-5 bg-midnight-950/90 border border-white/10 rounded-2xl p-4">
+                <p class="text-xs font-bold text-slate-300 uppercase tracking-wider text-center mb-3">
+                  Temps restant au tarif préférentiel de 50 000 FCFA (Échéance 15 nov.) :
+                </p>
+                <div class="grid grid-cols-4 gap-2 text-center">
+                  <div class="bg-midnight-800 rounded-xl p-2.5 border border-gold-500/25">
+                    <span id="cd-days" class="font-syne font-extrabold text-xl sm:text-2xl text-gold-400 block">04</span>
+                    <span class="text-[10px] uppercase text-slate-400">Jours</span>
+                  </div>
+                  <div class="bg-midnight-800 rounded-xl p-2.5 border border-gold-500/25">
+                    <span id="cd-hours" class="font-syne font-extrabold text-xl sm:text-2xl text-white block">06</span>
+                    <span class="text-[10px] uppercase text-slate-400">Heures</span>
+                  </div>
+                  <div class="bg-midnight-800 rounded-xl p-2.5 border border-gold-500/25">
+                    <span id="cd-mins" class="font-syne font-extrabold text-xl sm:text-2xl text-white block">45</span>
+                    <span class="text-[10px] uppercase text-slate-400">Min</span>
+                  </div>
+                  <div class="bg-midnight-800 rounded-xl p-2.5 border border-gold-500/25">
+                    <span id="cd-secs" class="font-syne font-extrabold text-xl sm:text-2xl text-gold-400 block">12</span>
+                    <span class="text-[10px] uppercase text-slate-400">Sec</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Aperçu des 4 paliers officiels -->
+              <div class="space-y-2.5 text-xs sm:text-sm">
+                <div class="flex items-center justify-between p-3 rounded-xl bg-gold-500/15 border border-gold-500 text-white font-bold">
+                  <span class="flex items-center gap-2">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-gold-400 shrink-0"></i>
+                    <span>Jusqu'au 15 novembre 2026</span>
+                  </span>
+                  <span class="font-syne font-extrabold text-gold-400">50 000 FCFA</span>
+                </div>
+                <div class="flex items-center justify-between p-3 rounded-xl bg-midnight-900/80 border border-white/10 text-slate-300">
+                  <span>Du 16 au 30 novembre 2026</span>
+                  <span class="font-bold text-white">60 000 FCFA</span>
+                </div>
+                <div class="flex items-center justify-between p-3 rounded-xl bg-midnight-900/80 border border-white/10 text-slate-300">
+                  <span>Du 1er au 15 décembre 2026</span>
+                  <span class="font-bold text-white">70 000 FCFA</span>
+                </div>
+                <div class="flex items-center justify-between p-3 rounded-xl bg-midnight-900/80 border border-white/10 text-slate-300">
+                  <span>Du 16 au 31 décembre 2026</span>
+                  <span class="font-bold text-white">80 000 FCFA</span>
+                </div>
+              </div>
+
+              <a href="#simulateur-upline" class="mt-5 w-full bg-gold-500 hover:bg-gold-400 text-midnight-950 font-syne font-extrabold text-xs sm:text-sm uppercase py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition">
+                <span>Calculer & Réserver ma part maintenant</span>
+                <i data-lucide="zap" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 2 : SIMULATEUR DE SOUSCRIPTION UPLINE / REACTOR   -->
+    <!-- ========================================================= -->
+    <section id="simulateur-upline" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-10">
+        <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-gold-400">SOUSCRIPTION AUTOMATISÉE EN FCFA</p>
+        <h2 class="font-syne font-extrabold text-white section-title-clamp mt-2">
+          Simulateur de participation UPLINE & REACTOR
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-2 leading-relaxed">
+          Chaque participant obtient l'accès au compte REACTOR contenant les Uplines (programme de développement Managbegroup). Sélectionnez votre période de souscription, le nombre de parts et envoyez directement votre fiche de réservation sur le WhatsApp officiel de Machnega.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Panneau de configuration (7 cols) -->
+        <div class="lg:col-span-7 min-w-0 glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+          
+          <!-- Étape 1 : Choix du Palier -->
+          <div>
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-gold-400 mb-3">
+              1. Choisissez votre période de versement (Tarif évolutif) *
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="tier-buttons">
+              <button type="button" onclick="selectTier(0)" id="tier-btn-0" class="tier-active text-left p-4 rounded-2xl border border-white/15 bg-midnight-900 transition">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-extrabold uppercase px-2 py-0.5 rounded bg-gold-500 text-midnight-950">Palier Actuel</span>
+                  <span class="font-syne font-extrabold text-lg text-gold-400">50 000 FCFA</span>
+                </div>
+                <p class="font-bold text-sm text-white mt-2">Jusqu'au 15 novembre 2026</p>
+                <p class="text-xs text-slate-400 mt-0.5">Économisez 30 000 FCFA sur le tarif final</p>
+              </button>
+
+              <button type="button" onclick="selectTier(1)" id="tier-btn-1" class="text-left p-4 rounded-2xl border border-white/15 bg-midnight-900 transition">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-bold uppercase px-2 py-0.5 rounded bg-white/10 text-slate-300">Palier 2</span>
+                  <span class="font-syne font-extrabold text-lg text-white">60 000 FCFA</span>
+                </div>
+                <p class="font-bold text-sm text-white mt-2">Du 16 au 30 novembre 2026</p>
+                <p class="text-xs text-slate-400 mt-0.5">Accès complet au compte Reactor Upline</p>
+              </button>
+
+              <button type="button" onclick="selectTier(2)" id="tier-btn-2" class="text-left p-4 rounded-2xl border border-white/15 bg-midnight-900 transition">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-bold uppercase px-2 py-0.5 rounded bg-white/10 text-slate-300">Palier 3</span>
+                  <span class="font-syne font-extrabold text-lg text-white">70 000 FCFA</span>
+                </div>
+                <p class="font-bold text-sm text-white mt-2">Du 1er au 15 décembre 2026</p>
+                <p class="text-xs text-slate-400 mt-0.5">Accès complet au compte Reactor Upline</p>
+              </button>
+
+              <button type="button" onclick="selectTier(3)" id="tier-btn-3" class="text-left p-4 rounded-2xl border border-white/15 bg-midnight-900 transition">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-bold uppercase px-2 py-0.5 rounded bg-white/10 text-slate-300">Palier Final</span>
+                  <span class="font-syne font-extrabold text-lg text-white">80 000 FCFA</span>
+                </div>
+                <p class="font-bold text-sm text-white mt-2">Du 16 au 31 décembre 2026</p>
+                <p class="text-xs text-slate-400 mt-0.5">Clôture des participations de fin d'année</p>
+              </button>
+            </div>
+          </div>
+
+          <!-- Étape 2 : Nombre de parts & Informations Participant -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                2. Nombre de parts souhaitées *
+              </label>
+              <div class="flex items-center bg-midnight-950 border border-white/15 rounded-xl overflow-hidden">
+                <button type="button" onclick="changeShares(-1)" class="px-4 py-3 text-white hover:bg-white/10 font-bold text-lg transition">−</button>
+                <input id="upline-shares" type="number" min="1" max="50" value="1" oninput="updateUplineSummary()" class="w-full bg-transparent text-center font-syne font-extrabold text-lg text-white focus:outline-none">
+                <button type="button" onclick="changeShares(1)" class="px-4 py-3 text-white hover:bg-white/10 font-bold text-lg transition">+</button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                3. Mode de règlement préféré *
+              </label>
+              <select id="upline-payment" onchange="updateUplineSummary()" class="w-full bg-midnight-950 border border-white/15 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-gold-400">
+                <option value="Mixx by Yas (Tmoney)">Mixx by Yas (Togo)</option>
+                <option value="Flooz (Moov Africa)">Flooz (Moov Africa)</option>
+                <option value="Mobile Money UEMOA / International">Mobile Money UEMOA / International</option>
+                <option value="Espèces / Dépôt Direct Lomé">Espèces / Rendez-vous Lomé</option>
+                <option value="USDT / Crypto">USDT / Crypto</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                Votre Nom & Prénom *
+              </label>
+              <input id="investor-name" type="text" placeholder="Ex: Koffi Mensah" oninput="updateUplineSummary()" class="w-full bg-midnight-950 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-400">
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                Ville & Pays de résidence *
+              </label>
+              <input id="investor-city" type="text" placeholder="Ex: Lomé, Togo / Ouagadougou..." oninput="updateUplineSummary()" class="w-full bg-midnight-950 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-gold-400">
+            </div>
+          </div>
+        </div>
+
+        <!-- Panneau Récapitulatif & Validation WhatsApp (5 cols) -->
+        <div class="lg:col-span-5 min-w-0 glass-card rounded-3xl p-6 sm:p-8 border-2 border-gold-500/35 flex flex-col justify-between space-y-6">
+          <div>
+            <div class="flex items-center justify-between pb-4 border-b border-white/10">
+              <span class="font-syne font-extrabold text-lg text-white">Fiche de Souscription</span>
+              <span class="text-xs font-bold text-gold-400 uppercase">Managbegroup • Reactor</span>
+            </div>
+
+            <div class="mt-5 space-y-3 text-sm">
+              <div class="flex justify-between text-slate-300">
+                <span>Période sélectionnée :</span>
+                <strong id="sum-period" class="text-white text-right">Jusqu'au 15 nov. 2026</strong>
+              </div>
+              <div class="flex justify-between text-slate-300">
+                <span>Prix unitaire de la part :</span>
+                <strong id="sum-unit" class="text-gold-400">50 000 FCFA</strong>
+              </div>
+              <div class="flex justify-between text-slate-300">
+                <span>Nombre de parts :</span>
+                <strong id="sum-shares" class="text-white">1 part</strong>
+              </div>
+              <div class="flex justify-between text-slate-300">
+                <span>Moyen de paiement :</span>
+                <strong id="sum-payment" class="text-white">Mixx by Yas (Tmoney)</strong>
+              </div>
+              <div class="pt-4 border-t border-white/10 flex items-baseline justify-between">
+                <span class="font-syne font-bold text-base text-white">TOTAL À VERSER :</span>
+                <span id="sum-total" class="font-syne font-extrabold text-2xl sm:text-3xl text-gold-400">50 000 FCFA</span>
+              </div>
+            </div>
+
+            <div class="mt-5 bg-midnight-950/90 border border-white/10 rounded-2xl p-3.5 text-xs text-slate-300 space-y-1.5">
+              <p class="font-bold text-emerald-400 flex items-center gap-1.5">
+                <i data-lucide="shield-check" class="w-4 h-4"></i> Droits inclus dans votre participation :
+              </p>
+              <p>• Accès au compte REACTOR contenant les Uplines.</p>
+              <p>• Intégration au groupe privé des copropriétaires et suivi des versements SINTEZMET.</p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <button type="button" onclick="addUplineToDossier()" class="w-full bg-midnight-800 hover:bg-midnight-700 border border-gold-500/50 text-gold-400 font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i>
+              <span>Ajouter à mon dossier multi-projets</span>
+            </button>
+            <button type="button" onclick="sendDirectUplineWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 to-agro-600 hover:from-emerald-400 hover:to-agro-500 text-midnight-950 font-syne font-extrabold text-xs sm:text-sm uppercase py-4 px-5 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition">
+              <i data-lucide="message-circle" class="w-5 h-5"></i>
+              <span>Valider sur WhatsApp (+228 91 91 36 23)</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 3 : PÔLE TECH & INDUSTRIE RUSSE (REACTOR / MLC)   -->
+    <!-- ========================================================= -->
+    <section id="projets-russes" class="py-16 sm:py-20 bg-midnight-900/70 border-y border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <div>
+            <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-gold-400">MEILLEURS PROJETS DE LA RUSSIE 🇷🇺</p>
+            <h2 class="font-syne font-extrabold text-white section-title-clamp mt-2">
+              Financement Participatif & Haute Technologie
+            </h2>
+          </div>
+          <p class="text-slate-400 text-sm max-w-md">
+            Suivez les avancées scientifiques, les livraisons d'équipements en salles blanches et les communiqués officiels sans qu'ils ne se perdent dans le fil WhatsApp.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Carte Projet 1 : MLC Health (Flystat CGM) -->
+          <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between">
+            <div>
+              <div class="relative h-52 bg-midnight-800 overflow-hidden">
+                <img
+                  src="WhatsApp Image 2026-11-11 at 17.14.04 (2).jpeg"
+                  alt="Salles blanches MLC Health Biocapteurs CGM Flystat"
+                  onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=900&q=80'"
+                  class="w-full h-full object-cover"
+                >
+                <span class="absolute top-3 left-3 bg-sky-500 text-midnight-950 font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-md">
+                  MLC ENGINEERING • SALLES BLANCHES
+                </span>
+              </div>
+              <div class="p-6 space-y-3">
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                  <span>CEO : Ivan Saltanov</span>
+                  <span class="text-emerald-400 font-bold">Financement privé en clôture</span>
+                </div>
+                <h3 class="font-syne font-bold text-xl text-white">MLC Health — Biocapteurs CGM Flystat</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                  Livraison de la deuxième partie de l'équipement de haute précision dans les salles blanches pour la production industrielle des biocapteurs médicaux de suivi du glucose en continu (CGM Flystat).
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0 space-y-2.5">
+              <button onclick="addProjectInquiry('MLC Health — Biocapteurs CGM Flystat', 'Demande de parts & accompagnement MLC Health')" class="w-full bg-gold-500 hover:bg-gold-400 text-midnight-950 font-syne font-extrabold text-xs uppercase py-3.5 px-4 rounded-xl transition">
+                Demander les modalités sur WhatsApp
+              </button>
+            </div>
+          </article>
+
+          <!-- Carte Projet 2 : REACTOR & SINTEZMET (Osmium & Réacteurs TRU) -->
+          <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between">
+            <div>
+              <div class="relative h-52 bg-midnight-800 overflow-hidden">
+                <img
+                  src="WhatsApp Image 2026-11-11 at 17.14.06 (2).jpeg"
+                  alt="Projet International Reactor et Sintezmet"
+                  onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80'"
+                  class="w-full h-full object-cover"
+                >
+                <span class="absolute top-3 left-3 bg-gold-500 text-midnight-950 font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-md">
+                  REACTOR • SINTEZMET
+                </span>
+              </div>
+              <div class="p-6 space-y-3">
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                  <span>Dividendes non-classiques</span>
+                  <span class="text-gold-400 font-bold">Tickets $100 – $200</span>
+                </div>
+                <h3 class="font-syne font-bold text-xl text-white">Projet REACTOR, Osmium & Réacteurs TRU</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                  Phase finale de la 10e expérience de contrôle sur l'obtention de l'osmium, préparation des prochains versements de SINTEZMET, programme UPLINE et expansion en Afrique de l'Ouest (Togo, Burkina Faso).
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0 space-y-2.5">
+              <a href="#simulateur-upline" class="w-full block text-center bg-gold-500 hover:bg-gold-400 text-midnight-950 font-syne font-extrabold text-xs uppercase py-3.5 px-4 rounded-xl transition">
+                Rejoindre via le programme Upline
+              </a>
+            </div>
+          </article>
+
+          <!-- Carte Projet 3 : Lignes de Production & Coopération Internationale -->
+          <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between">
+            <div>
+              <div class="relative h-52 bg-midnight-800 overflow-hidden">
+                <img
+                  src="WhatsApp Image 2026-11-11 at 17.14.04 (1).jpeg"
+                  alt="Laboratoire et ligne de production"
+                  onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&w=900&q=80'"
+                  class="w-full h-full object-cover"
+                >
+                <span class="absolute top-3 left-3 bg-emerald-500 text-midnight-950 font-extrabold text-[10px] uppercase px-2.5 py-1 rounded-md">
+                  PRODUCTION CHINE & RUSSIE
+                </span>
+              </div>
+              <div class="p-6 space-y-3">
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                  <span>Golden Africa Channel</span>
+                  <span class="text-emerald-400 font-bold">Communauté Active</span>
+                </div>
+                <h3 class="font-syne font-bold text-xl text-white">Suivi Industriel & Formation Investisseurs</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                  Accompagnement personnalisé par Machnega pour comprendre la répartition des parts, vérifier les étapes industrielles réelles et sécuriser vos portefeuilles de financement participatif.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0 space-y-2.5">
+              <button onclick="addProjectInquiry('Accompagnement & Formation Financement Participatif Russe', 'Rendez-vous de présentation des projets russes')" class="w-full bg-midnight-800 hover:bg-midnight-700 border border-gold-500/40 text-gold-400 font-syne font-extrabold text-xs uppercase py-3.5 px-4 rounded-xl transition">
+                Prendre RDV d'information
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 4 : PÔLE AGRO-INDUSTRIE (MANAGBE GROUPE)          -->
+    <!-- ========================================================= -->
+    <section id="managbe-agro" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="glass-card rounded-3xl p-6 sm:p-10 border-2 border-agro-500/35 bg-gradient-to-br from-emerald-950/50 via-midnight-900 to-midnight-950">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Colonne Texte & Actionnaires (7 cols) -->
+          <div class="lg:col-span-7 min-w-0 space-y-5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-agro-500/20 border border-agro-500/40 text-agro-400 text-xs font-extrabold uppercase">
+              <i data-lucide="leaf" class="w-3.5 h-3.5"></i>
+              <span>MGROUP CACAO • HÉVÉA • ANACARDE (699 MEMBRES)</span>
+            </div>
+
+            <h2 class="font-syne font-extrabold text-white section-title-clamp">
+              MANAGBE GROUPE : Agriculture, Industrie & Avenir Durable
+            </h2>
+
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Devenez actionnaire et partenaire d'une vision de croissance durable dans l'hévéaculture, le cacao et l'anacarde. Chaque dimanche soir, rejoignez notre conférence stratégique en ligne pour suivre les avancées du projet et les nouvelles opportunités d'investissement.
+            </p>
+
+            <!-- 3 Piliers de la conférence -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+              <div class="bg-midnight-950/80 border border-agro-500/25 rounded-2xl p-4">
+                <i data-lucide="trending-up" class="w-5 h-5 text-agro-400 mb-1.5"></i>
+                <p class="font-bold text-sm text-white">Avancées du projet</p>
+                <p class="text-xs text-slate-400 mt-0.5">Bilan de terrain et plantations</p>
+              </div>
+              <div class="bg-midnight-950/80 border border-agro-500/25 rounded-2xl p-4">
+                <i data-lucide="coins" class="w-5 h-5 text-gold-400 mb-1.5"></i>
+                <p class="font-bold text-sm text-white">Nouvelles parts</p>
+                <p class="text-xs text-slate-400 mt-0.5">Opportunités d'actionnariat</p>
+              </div>
+              <div class="bg-midnight-950/80 border border-agro-500/25 rounded-2xl p-4">
+                <i data-lucide="trees" class="w-5 h-5 text-agro-400 mb-1.5"></i>
+                <p class="font-bold text-sm text-white">Hévéaculture</p>
+                <p class="text-xs text-slate-400 mt-0.5">Croissance industrielle durable</p>
+              </div>
+            </div>
+
+            <!-- Bloc Google Meet Dimanche 19h55 -->
+            <div class="bg-midnight-950 border border-agro-500/40 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <span class="text-[11px] font-extrabold uppercase tracking-wider text-agro-400 block">CONFÉRENCE EN LIGNE HEBDOMADAIRE</span>
+                <p class="font-syne font-extrabold text-lg text-white mt-0.5">Chaque Dimanche à 19h55 précises</p>
+                <p class="text-xs text-slate-400 mt-0.5">Lien Google Meet : <code class="text-agro-400">meet.google.com/smv-ubjp-fbn</code></p>
+              </div>
+              <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                <a href="https://meet.google.com/smv-ubjp-fbn" target="_blank" rel="noopener" class="flex-1 sm:flex-initial bg-agro-500 hover:bg-agro-400 text-midnight-950 font-syne font-extrabold text-xs uppercase px-4 py-3 rounded-xl text-center transition">
+                  Rejoindre le Meet
+                </a>
+                <button onclick="addProjectInquiry('Actionnariat MANAGBE GROUPE (Hévéa, Cacao, Anacarde)', 'Je souhaite devenir actionnaire Managbe Groupe et recevoir le dossier de présentation')" class="flex-1 sm:flex-initial bg-midnight-800 hover:bg-midnight-700 border border-white/15 text-white font-bold text-xs px-4 py-3 rounded-xl transition">
+                  Devenir Actionnaire
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Colonne Affiche Officielle (5 cols) -->
+          <div class="lg:col-span-5 min-w-0">
+            <div class="rounded-2xl overflow-hidden border border-agro-500/30 shadow-2xl">
+              <img
+                src="WhatsApp Image 2026-11-11 at 17.14.06 (3).jpeg"
+                alt="Conférence en ligne Managbe Groupe Hévéaculture"
+                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80'"
+                class="w-full h-auto object-cover"
+              >
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECTION 5 : ÉCOSYSTÈME CDM TRANS & GALA AGORA SENGHOR     -->
+    <!-- ========================================================= -->
+    <section id="cdm-ecosystem" class="py-16 sm:py-20 bg-midnight-900/60 border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mb-12">
+          <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-gold-400">MOBILITÉ AUTOMOBILE & GRAND GALA AFRICAIN</p>
+          <h2 class="font-syne font-extrabold text-white section-title-clamp mt-2">
+            Écosystème CDM TRANS & CDM Capital Africa Award
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Carte 1 : CDM TRANS (Le digital au service de la mécanique) -->
+          <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between">
+            <div>
+              <div class="relative h-60 bg-midnight-800 overflow-hidden">
+                <img
+                  src="WhatsApp Image 2026-11-11 at 17.14.05.jpeg"
+                  alt="Application CDM TRANS Mobilité et Entretien Automobile"
+                  onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=900&q=80'"
+                  class="w-full h-full object-cover"
+                >
+                <span class="absolute top-3 left-3 bg-amber-400 text-midnight-950 font-extrabold text-[10px] uppercase px-3 py-1 rounded-md">
+                  APPLICATION GOOGLE PLAY • CDM TRANS
+                </span>
+              </div>
+              <div class="p-6 sm:p-8 space-y-4">
+                <h3 class="font-syne font-extrabold text-2xl text-white">
+                  CDM TRANS — Le digital au service de la mécanique !
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                  Votre partenaire au service de la mobilité et de l'entretien automobile en Afrique. Tout pour votre véhicule au même endroit :
+                </p>
+                <div class="grid grid-cols-2 gap-2.5 text-xs font-semibold text-slate-200">
+                  <div class="bg-midnight-950/80 border border-white/10 rounded-xl p-2.5 flex items-center gap-2">
+                    <i data-lucide="wrench" class="w-4 h-4 text-gold-400 shrink-0"></i>
+                    <span>Trouver un mécanicien</span>
+                  </div>
+                  <div class="bg-midnight-950/80 border border-white/10 rounded-xl p-2.5 flex items-center gap-2">
+                    <i data-lucide="truck" class="w-4 h-4 text-gold-400 shrink-0"></i>
+                    <span>Dépannage / Remorquage</span>
+                  </div>
+                  <div class="bg-midnight-950/80 border border-white/10 rounded-xl p-2.5 flex items-center gap-2">
+                    <i data-lucide="zap" class="w-4 h-4 text-gold-400 shrink-0"></i>
+                    <span>Électricien auto</span>
+                  </div>
+                  <div class="bg-midnight-950/80 border border-white/10 rounded-xl p-2.5 flex items-center gap-2">
+                    <i data-lucide="settings" class="w-4 h-4 text-gold-400 shrink-0"></i>
+                    <span>Programmer un entretien</span>
+                  </div>
+                  <div class="bg-midnight-950/80 border border-white/10 rounded-xl p-2.5 flex items-center gap-2">
+                    <i data-lucide="shopping-cart" class="w-4 h-4 text-gold-400 shrink-0"></i>
+                    <span>Pièces détachées</span>
+                  </div>
+                  <div class="bg-midnight-950/80 border border-white/10 rounded-xl p-2.5 flex items-center gap-2">
+                    <i data-lucide="car" class="w-4 h-4 text-gold-400 shrink-0"></i>
+                    <span>Véhicules d'occasion</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 pt-0">
+              <button onclick="addProjectInquiry('Application CDM TRANS (Pièces détachées / Partenariat)', 'Je souhaite obtenir le lien Play Store CDM TRANS ou commander des pièces détachées')" class="w-full bg-gold-500 hover:bg-gold-400 text-midnight-950 font-syne font-extrabold text-xs sm:text-sm uppercase py-3.5 px-4 rounded-xl transition">
+                Obtenir l'application / Commander des pièces
+              </button>
+            </div>
+          </article>
+
+          <!-- Carte 2 : CDM CAPITAL AFRICA AWARD (20 Décembre à Agora Senghor) -->
+          <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between">
+            <div>
+              <div class="relative h-60 bg-midnight-800 overflow-hidden">
+                <img
+                  src="WhatsApp Image 2026-11-11 at 17.14.05 (1).jpeg"
+                  alt="CDM Capital Africa Award Première Édition Agora Senghor"
+                  onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80'"
+                  class="w-full h-full object-cover"
+                >
+                <span class="absolute top-3 left-3 bg-gold-500 text-midnight-950 font-extrabold text-[10px] uppercase px-3 py-1 rounded-md">
+                  20 DÉCEMBRE • AGORA SENGHOR LOMÉ
+                </span>
+              </div>
+              <div class="p-6 sm:p-8 space-y-4">
+                <h3 class="font-syne font-extrabold text-2xl text-white">
+                  CDM CAPITAL AFRICA AWARD — 1ère Édition
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                  Un rendez-vous historique à <strong class="text-white">Agora Senghor (Lomé) le 20 décembre</strong>. De l'électricité dans l'air et une rencontre inédite des acteurs économiques et investisseurs sur le continent africain.
+                </p>
+                <div class="bg-midnight-950/90 border border-gold-500/30 rounded-2xl p-4 space-y-2 text-xs text-slate-300">
+                  <p class="font-bold text-gold-400 uppercase">Billetterie & Informations Officielles :</p>
+                  <p>• Lieu : Agora Senghor, Lomé</p>
+                  <p>• Date : 20 Décembre</p>
+                  <p>• Billetterie en ligne : <code class="text-white">eventix.mera-digital.com</code></p>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 sm:p-8 pt-0 flex flex-col sm:flex-row gap-3">
+              <button onclick="addProjectInquiry('Réservation Ticket — CDM CAPITAL AFRICA AWARD (20 Décembre Agora Senghor)', 'Je souhaite réserver mes tickets pour le CDM Capital Africa Award du 20 décembre à Agora Senghor')" class="flex-1 bg-gold-500 hover:bg-gold-400 text-midnight-950 font-syne font-extrabold text-xs sm:text-sm uppercase py-3.5 px-4 rounded-xl transition">
+                Réserver mon Ticket via WhatsApp
+              </button>
+              <a href="https://youtu.be/MugJ7RBrORI" target="_blank" rel="noopener" class="bg-midnight-800 hover:bg-midnight-700 border border-white/15 text-white font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl flex items-center justify-center gap-1.5 transition">
+                <i data-lucide="play-circle" class="w-4 h-4 text-gold-400"></i>
+                <span>Spot Officiel</span>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- TIROIR LATÉRAL : DOSSIER DE SOUSCRIPTION MULTI-PROJETS -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+    <div onclick="closeCartDrawer()" class="absolute inset-0 bg-black/75 backdrop-blur-sm"></div>
+    <aside class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-midnight-900 border-l border-white/15 p-6 flex flex-col justify-between z-10">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-white/10">
+          <div>
+            <span class="text-[10px] font-extrabold uppercase tracking-widest text-gold-400 block">RÉCAPITULATIF</span>
+            <h3 class="font-syne font-extrabold text-lg text-white">Votre Dossier Machnega</h3>
+          </div>
+          <button onclick="closeCartDrawer()" class="p-2 rounded-lg bg-white/5 text-slate-300 hover:text-white">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <div id="cart-items-list" class="mt-4 space-y-3 max-h-[55vh] overflow-y-auto pr-1">
+          <!-- Injecté dynamiquement -->
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-white/10 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-bold text-slate-300">Total des souscriptions chiffrées :</span>
+          <span id="cart-total-fcfa" class="font-syne font-extrabold text-xl text-gold-400">0 FCFA</span>
+        </div>
+        <button onclick="sendFullDossierWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 to-agro-600 text-midnight-950 font-syne font-extrabold text-xs sm:text-sm uppercase py-4 px-5 rounded-xl flex items-center justify-center gap-2">
+          <i data-lucide="send" class="w-4 h-4"></i>
+          <span>Envoyer le dossier au +228 91 91 36 23</span>
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- FOOTER OFFICIEL + SIGNATURE OBLIGATOIRE RODIS STUDIO -->
+  <footer id="contact" class="bg-midnight-950 border-t border-white/10 pt-14 pb-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-white/10">
+        <div class="md:col-span-6 space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-gold-500 flex items-center justify-center font-syne font-extrabold text-midnight-950 text-sm">
+              MG
+            </div>
+            <span class="font-syne font-extrabold text-lg text-white">MACHNEGA INVEST & HUB</span>
+          </div>
+          <p class="text-slate-400 text-sm max-w-md leading-relaxed">
+            Finance • Formation • Planification d'événements. Coordination des participations Reactor/Upline, Managbe Groupe (Cacao, Hévéa, Anacarde) et CDM Trans.
+          </p>
+          <div class="text-xs text-slate-300 space-y-1 pt-1">
+            <p><strong>WhatsApp Business (24h/24) :</strong> +228 91 91 36 23</p>
+            <p><strong>Email :</strong> monssour2020@gmail.com</p>
+            <p><strong>Instagram :</strong> @machnega29</p>
+          </div>
+        </div>
+
+        <div class="md:col-span-6 flex flex-col justify-between items-start md:items-end">
+          <a href="https://wa.me/22891913623?text=Bonjour%20Machnega%2C%20je%20viens%20de%20consulter%20votre%20portail%20officiel%20et%20je%20souhaite%20investir." target="_blank" rel="noopener" class="bg-gold-500 hover:bg-gold-400 text-midnight-950 font-syne font-extrabold text-xs sm:text-sm uppercase px-6 py-4 rounded-xl inline-flex items-center gap-2 transition">
+            <i data-lucide="phone-call" class="w-4 h-4"></i>
+            <span>Contacter Machnega sur WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Signature obligatoire RODIS STUDIO -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <p>© 2026 MACHNEGA — Tous droits réservés.</p>
+        <p class="text-center sm:text-right">
+          Conçu par <a href="https://rodis-studio.github.io/" target="_blank" rel="noopener" class="text-gold-400 font-bold hover:underline">RODIS STUDIO®</a> — Lomé, Togo (<a href="https://wa.me/22893095094" target="_blank" rel="noopener" class="text-white hover:underline">+228 93 09 50 94</a>)
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LOGIQUE JAVASCRIPT COMPLÈTE -->
+  <script>
+    const MACHNEGA_WA = "22891913623";
+
+    const tiers = [
+      { id: 0, label: "Jusqu'au 15 nov. 2026 (Palier 1)", price: 50000 },
+      { id: 1, label: "Du 16 au 30 nov. 2026 (Palier 2)", price: 60000 },
+      { id: 2, label: "Du 1er au 15 déc. 2026 (Palier 3)", price: 70000 },
+      { id: 3, label: "Du 16 au 31 déc. 2026 (Palier 4)", price: 80000 }
+    ];
+
+    let selectedTierIndex = 0;
+    let dossierCart = [];
+
+    function formatFCFA(amount) {
+      return String(amount).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " FCFA";
+    }
+
+    function selectTier(idx) {
+      selectedTierIndex = idx;
+      tiers.forEach((t, i) => {
+        const btn = document.getElementById(`tier-btn-${i}`);
+        if (i === idx) {
+          btn.classList.add('tier-active');
+        } else {
+          btn.classList.remove('tier-active');
+        }
+      });
+      updateUplineSummary();
+    }
+
+    function changeShares(delta) {
+      const input = document.getElementById('upline-shares');
+      let val = parseInt(input.value || "1", 10) + delta;
+      if (val < 1) val = 1;
+      if (val > 50) val = 50;
+      input.value = val;
+      updateUplineSummary();
+    }
+
+    function updateUplineSummary() {
+      const tier = tiers[selectedTierIndex];
+      const shares = Math.max(1, parseInt(document.getElementById('upline-shares').value || "1", 10));
+      const payment = document.getElementById('upline-payment').value;
+      const total = tier.price * shares;
+
+      document.getElementById('sum-period').textContent = tier.label;
+      document.getElementById('sum-unit').textContent = formatFCFA(tier.price);
+      document.getElementById('sum-shares').textContent = shares + (shares > 1 ? " parts" : " part");
+      document.getElementById('sum-payment').textContent = payment;
+      document.getElementById('sum-total').textContent = formatFCFA(total);
+    }
+
+    function sendDirectUplineWhatsApp() {
+      const tier = tiers[selectedTierIndex];
+      const shares = Math.max(1, parseInt(document.getElementById('upline-shares').value || "1", 10));
+      const payment = document.getElementById('upline-payment').value;
+      const name = (document.getElementById('investor-name').value || "Investisseur").trim();
+      const city = (document.getElementById('investor-city').value || "Lomé, Togo").trim();
+      const total = tier.price * shares;
+
+      const msg =
+        `🌟 *SOUSCRIPTION PROGRAMME UPLINE / REACTOR (MANAGBEGROUP)*\n\n` +
+        `👤 *Participant :* ${name}\n` +
+        `📍 *Ville / Pays :* ${city}\n` +
+        `📅 *Palier choisi :* ${tier.label}\n` +
+        `🔢 *Nombre de parts :* ${shares}\n` +
+        `💳 *Mode de paiement :* ${payment}\n` +
+        `💰 *TOTAL À VERSER :* ${formatFCFA(total)}\n\n` +
+        `Bonjour Machnega, je souhaite valider ma participation au compte REACTOR contenant les Uplines.`;
+
+      window.open(`https://wa.me/${MACHNEGA_WA}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function addUplineToDossier() {
+      const tier = tiers[selectedTierIndex];
+      const shares = Math.max(1, parseInt(document.getElementById('upline-shares').value || "1", 10));
+      const total = tier.price * shares;
+
+      dossierCart.push({
+        title: `Souscription UPLINE / REACTOR (${tier.label})`,
+        detail: `${shares} part(s) x ${formatFCFA(tier.price)}`,
+        amount: total
+      });
+      renderDossierCart();
+      openCartDrawer();
+    }
+
+    function addProjectInquiry(title, detail) {
+      dossierCart.push({
+        title: title,
+        detail: detail,
+        amount: 0
+      });
+      renderDossierCart();
+      openCartDrawer();
+    }
+
+    function removeDossierItem(idx) {
+      dossierCart.splice(idx, 1);
+      renderDossierCart();
+    }
+
+    function renderDossierCart() {
+      document.getElementById('cart-count-badge').textContent = dossierCart.length;
+      const list = document.getElementById('cart-items-list');
+      if (dossierCart.length === 0) {
+        list.innerHTML = `<p class="text-sm text-slate-400 text-center py-8">Votre dossier est vide. Sélectionnez un palier Upline ou un projet (MLC, Managbe Groupe, CDM Trans).</p>`;
+        document.getElementById('cart-total-fcfa').textContent = "0 FCFA";
+        return;
+      }
+
+      let sum = 0;
+      list.innerHTML = dossierCart.map((item, i) => {
+        sum += item.amount;
+        return `
+          <div class="bg-midnight-950 border border-white/10 rounded-2xl p-3.5 flex items-start justify-between gap-2">
+            <div>
+              <p class="font-bold text-xs text-white">${item.title}</p>
+              <p class="text-xs text-slate-400 mt-0.5">${item.detail}</p>
+              ${item.amount > 0 ? `<p class="text-xs font-extrabold text-gold-400 mt-1">${formatFCFA(item.amount)}</p>` : `<p class="text-[11px] text-emerald-400 mt-1">Demande d'accompagnement / réservation</p>`}
+            </div>
+            <button onclick="removeDossierItem(${i})" class="text-slate-400 hover:text-red-400 p-1">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('cart-total-fcfa').textContent = formatFCFA(sum);
+      lucide.createIcons();
+    }
+
+    function sendFullDossierWhatsApp() {
+      if (dossierCart.length === 0) {
+        sendDirectUplineWhatsApp();
+        return;
+      }
+      const name = (document.getElementById('investor-name').value || "Investisseur").trim();
+      const city = (document.getElementById('investor-city').value || "Lomé, Togo").trim();
+      const payment = document.getElementById('upline-payment').value;
+
+      let total = 0;
+      const lines = dossierCart.map((it, idx) => {
+        total += it.amount;
+        return `${idx + 1}. *${it.title}* — ${it.detail}${it.amount > 0 ? ' (' + formatFCFA(it.amount) + ')' : ''}`;
+      }).join('\n');
+
+      const msg =
+        `🚀 *DOSSIER INVESTISSEUR — PORTAIL MACHNEGA*\n\n` +
+        `👤 *Nom :* ${name}\n` +
+        `📍 *Ville :* ${city}\n` +
+        `💳 *Mode de paiement :* ${payment}\n\n` +
+        `*Éléments sélectionnés :*\n${lines}\n\n` +
+        (total > 0 ? `💰 *TOTAL CHIFFRÉ : ${formatFCFA(total)}*\n\n` : `\n`) +
+        `Bonjour Machnega, merci de me confirmer la procédure pour finaliser.`;
+
+      window.open(`https://wa.me/${MACHNEGA_WA}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function openCartDrawer() {
+      document.getElementById('cart-drawer').classList.remove('hidden');
+    }
+
+    function closeCartDrawer() {
+      document.getElementById('cart-drawer').classList.add('hidden');
+    }
+
+    function toggleMobileNav() {
+      document.getElementById('mobile-nav').classList.toggle('hidden');
+    }
+
+    // Compte à rebours dynamique vers le 15 novembre 2026 à 23:59:59
+    function startCountdown() {
+      const target = new Date("2026-11-15T23:59:59Z").getTime();
+      setInterval(() => {
+        const now = new Date().getTime();
+        let diff = target - now;
+        if (diff < 0) diff = 0;
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+        document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+        document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+        document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+      }, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateUplineSummary();
+      renderDossierCart();
+      startCountdown();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
