@@ -4,49 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="QTzAK8WLsPOTwuTMtXdZNBFVSGYJzHXg0_GYtVW4f6Y" />
-  <title>RODIS STUDIO® — Agence Digitale • Lomé</title>
-  <meta name="description" content="RODIS STUDIO — Agence digitale à Lomé. Sites vitrines, boutiques WhatsApp et logos HD livrés en 48h.">
+  <title>RODIS STUDIO® — Agence Digitale &amp; Vibe Coding • Lomé, Togo</title>
+  <meta name="description" content="RODIS STUDIO® — Agence digitale &amp; Vibe Coding à Lomé par Sidoine BEDI. Boutiques e-commerce WhatsApp, sites B2B, PWA &amp; vitrines 3D livrés en 24-48h. 0 FCFA d'abonnement.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            forest: {
-              950: '#142E12',
-              900: '#1B3F17',
-              800: '#24521F',
-              700: '#2D6427',
-              600: '#35742E'
+            navy: {
+              950: '#050914',
+              900: '#070D1F',
+              800: '#0B1224',
+              700: '#0E1A3A',
+              600: '#122452'
             },
-            lime: {
-              DEFAULT: '#39E51B',
-              light: '#53F339',
-              dark: '#2EC214'
+            azure: {
+              DEFAULT: '#2563EB',
+              light: '#38BDF8',
+              dark: '#0E34A0',
+              electric: '#1D56E8'
+            },
+            amber: {
+              DEFAULT: '#D97706',
+              dark: '#4A1D09',
+              mid: '#B4410E',
+              bright: '#EA580C'
             }
           },
           fontFamily: {
-            display: ['Syne', 'sans-serif'],
-            body: ['Plus Jakarta Sans', 'sans-serif']
+            display: ['Unbounded', 'sans-serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
           }
         }
       }
     }
   </script>
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-  <!-- Three.js (Animation 3D Hero) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -58,93 +62,71 @@
     }
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: #1B3F17;
+      background: #050914;
       color: #FFFFFF;
     }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #1B3F17; }
-    ::-webkit-scrollbar-thumb { background: #39E51B; border-radius: 3px; }
+    ::-webkit-scrollbar-track { background: #070D1F; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #2563EB, #38BDF8); border-radius: 3px; }
 
     /* Selection */
-    ::selection { background: #39E51B; color: #142E12; }
+    ::selection { background: #2563EB; color: #FFFFFF; }
 
-    /* Hero Portrait Central Styling */
-    .hero-portrait-container {
-      position: absolute;
-      left: 50%;
-      top: 48%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-      pointer-events: none;
-      display: flex;
+    /* Scroll Progress Bar */
+    #scrollProgress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0%;
+      background: linear-gradient(90deg, #2563EB, #38BDF8);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* Button Azure */
+    .btn-azure {
+      background: linear-gradient(90deg, #2563EB, #38BDF8);
+      color: #FFFFFF;
+      font-weight: 700;
+      border-radius: 0.75rem;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      max-width: 900px;
+    }
+    .btn-azure:hover {
+      box-shadow: 0 0 35px rgba(37, 99, 235, 0.5), 0 0 15px rgba(56, 189, 248, 0.3);
+      transform: translateY(-2px);
     }
 
-    .hero-portrait-img {
-      height: 52vh;
-      max-height: 540px;
-      width: auto;
-      object-fit: cover;
-      mix-blend-mode: screen;
-      -webkit-mask-image: radial-gradient(ellipse 72% 70% at 50% 48%, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 78%);
-      mask-image: radial-gradient(ellipse 72% 70% at 50% 48%, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 78%);
+    /* Card Dark */
+    .card-dark {
+      background: #0B1224;
+      border: 1px solid rgba(56, 152, 255, 0.16);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .card-dark:hover {
+      border-color: #38BDF8;
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(37, 99, 235, 0.18);
     }
 
-    @media (min-width: 768px) {
-      .hero-portrait-img {
-        height: 72vh;
-        max-height: 760px;
-      }
+    /* Ghost button */
+    .btn-ghost {
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
-
-    .portrait-halo {
-      position: absolute;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(57, 229, 27, 0.42) 0%, rgba(45, 100, 39, 0.22) 50%, transparent 72%);
-      filter: blur(55px);
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    @media (min-width: 768px) {
-      .portrait-halo {
-        width: 480px;
-        height: 480px;
-      }
-    }
-
-    /* Diamond shape Ovilix Style */
-    .diamond {
-      width: 300px;
-      height: 300px;
-      transform: rotate(45deg);
-      border: 1.5px solid rgba(57, 229, 27, 0.35);
-      background: linear-gradient(135deg, rgba(53, 116, 46, 0.4) 0%, rgba(36, 82, 31, 0.2) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 0 90px rgba(57, 229, 27, 0.2), inset 0 0 50px rgba(57, 229, 27, 0.12);
-      position: absolute;
-      right: 8%;
-      top: 50%;
-      margin-top: -150px;
-      z-index: 2;
-    }
-
-    @media (max-width: 768px) {
-      .diamond {
-        width: 140px;
-        height: 140px;
-        margin-top: -70px;
-        right: 3%;
-        opacity: 0.25;
-      }
+    .btn-ghost:hover {
+      border-color: #38BDF8;
+      color: #38BDF8;
+      background: rgba(37, 99, 235, 0.1);
     }
 
     /* Nav link hover */
@@ -154,54 +136,30 @@
       position: absolute;
       bottom: -4px; left: 0;
       width: 0; height: 2px;
-      background: #39E51B;
+      background: linear-gradient(90deg, #2563EB, #38BDF8);
       transition: width 0.3s ease;
     }
     .nav-link:hover::after { width: 100%; }
 
-    /* Card hover */
-    .project-card {
-      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease, border-color 0.4s ease;
-    }
-    .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 45px rgba(20, 46, 18, 0.7);
-      border-color: rgba(57, 229, 27, 0.4);
+    /* Hero grid pattern */
+    .hero-grid-pattern {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+      background-size: 48px 48px;
     }
 
-    /* Service column hover */
-    .service-col {
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-      transition: background 0.3s ease, border-color 0.3s ease;
-    }
-    .service-col:hover {
-      background: rgba(57, 229, 27, 0.08);
-      border-color: #39E51B;
+    /* Responsive title clamp */
+    .title-clamp {
+      font-size: clamp(1.8rem, 5vw, 3.75rem);
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
-    /* Button Lime Vif */
-    .btn-lime {
-      background: #39E51B;
-      color: #142E12;
-      font-weight: 800;
-      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    .btn-lime:hover {
-      background: #53F339;
-      box-shadow: 0 0 35px rgba(57, 229, 27, 0.5);
-      transform: translateY(-2px);
-    }
-
-    /* Ghost button */
-    .btn-ghost {
-      border: 1.5px solid rgba(255, 255, 255, 0.35);
-      color: #FFFFFF;
-      transition: all 0.3s ease;
-    }
-    .btn-ghost:hover {
-      border-color: #39E51B;
-      color: #39E51B;
-      background: rgba(57, 229, 27, 0.1);
+    .title-clamp-lg {
+      font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     /* Mobile menu */
@@ -211,225 +169,314 @@
     }
     .mobile-menu.open { transform: translateY(0); }
 
-    /* Form select/input styling */
-    select, input {
-      background: rgba(20, 46, 18, 0.65);
-      border: 1.5px solid rgba(255, 255, 255, 0.2);
+    /* Glassmorphism card */
+    .glass-card {
+      background: rgba(11, 18, 36, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    /* Concentric circles */
+    .concentric-circles {
+      background-image:
+        radial-gradient(circle at 80% 50%, rgba(255,255,255,0.07) 0%, transparent 35%),
+        radial-gradient(circle at 75% 45%, rgba(255,255,255,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 85% 55%, rgba(255,255,255,0.03) 0%, transparent 65%);
+    }
+
+    /* Halo effect */
+    .halo-blue {
+      background: radial-gradient(ellipse at 50% 40%, rgba(37, 99, 235, 0.15) 0%, rgba(29, 86, 232, 0.08) 40%, transparent 70%);
+    }
+
+    /* Tab active state */
+    .tab-active {
+      background: linear-gradient(90deg, #2563EB, #38BDF8);
+      color: #FFFFFF;
+    }
+
+    /* Filter pill */
+    .filter-pill {
+      background: rgba(11, 18, 36, 0.85);
+      border: 1px solid rgba(56, 152, 255, 0.2);
+      color: #94A3B8;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .filter-pill:hover {
+      border-color: #38BDF8;
+      color: #38BDF8;
+    }
+    .filter-pill.active {
+      background: linear-gradient(90deg, #2563EB, #38BDF8);
+      border-color: transparent;
+      color: #FFFFFF;
+    }
+
+    /* Form inputs dark */
+    select, input[type="text"], input[type="number"], textarea {
+      background: rgba(11, 18, 36, 0.95);
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
       color: #FFFFFF;
       transition: border-color 0.3s, background 0.3s;
     }
-    select:focus, input:focus {
+    select:focus, input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
       outline: none;
-      border-color: #39E51B;
-      background: rgba(20, 46, 18, 0.9);
+      border-color: #38BDF8;
+      background: rgba(11, 18, 36, 1);
     }
     select option {
-      background: #1B3F17;
+      background: #0B1224;
       color: #FFFFFF;
+    }
+
+    /* Floating button */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .scroll-top-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Grid children overflow fix */
+    .grid > * {
+      min-width: 0;
+    }
+
+    /* Arch portrait container */
+    .arch-container {
+      border-radius: 999px 999px 1.5rem 1.5rem;
+      overflow: hidden;
+    }
+
+    /* Badge amber */
+    .badge-amber {
+      background: #2B1D0A;
+      border: 1px solid rgba(217, 119, 6, 0.6);
+      color: #FCD34D;
+    }
+
+    /* Copy button feedback */
+    .copy-btn.copied {
+      background: #059669 !important;
+      border-color: #059669 !important;
+      color: #FFFFFF !important;
+    }
+
+    /* Social card hover */
+    .social-card {
+      background: rgba(11, 18, 36, 0.85);
+      border: 1px solid rgba(56, 152, 255, 0.16);
+      transition: all 0.3s ease;
+    }
+    .social-card:hover {
+      border-color: #38BDF8;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
     }
   </style>
 </head>
-<body class="overflow-x-hidden selection:bg-lime selection:text-forest-950">
+<body class="overflow-x-hidden">
 
-  <!-- ============ NAVIGATION ============ -->
-  <nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-forest-900/85 border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 flex items-center justify-between h-16 lg:h-20">
-      <!-- Logo -->
-      <a href="#" class="font-display font-800 text-2xl lg:text-3xl tracking-tight text-white">
-        Rodis<span class="text-lime">.</span>
+  <!-- ============ SCROLL PROGRESS BAR ============ -->
+  <div id="scrollProgress"></div>
+
+  <!-- ============ STICKY HEADER ============ -->
+  <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-xl border-b border-white/10" style="background: rgba(6, 11, 25, 0.92);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between h-16 lg:h-20">
+
+      <!-- Left: Logo -->
+      <a href="#accueil" class="flex items-center gap-2.5 shrink-0">
+        <span class="btn-azure w-10 h-10 flex items-center justify-center rounded-xl text-sm font-black tracking-tight shadow-md">RS</span>
+        <span class="font-display font-800 text-base sm:text-lg tracking-tight text-white hidden sm:inline">RODIS STUDIO<sup class="text-[10px] align-super text-azure-light">®</sup></span>
       </a>
 
-      <!-- Desktop Links -->
-      <div class="hidden md:flex items-center gap-10 text-sm font-body font-medium tracking-wide text-[#F0FDF4]">
-        <a href="#hero" class="nav-link hover:text-white">Accueil</a>
-        <a href="#about" class="nav-link hover:text-white">À propos</a>
-        <a href="#services" class="nav-link hover:text-white">Services</a>
-        <a href="#projects" class="nav-link hover:text-white">Projets</a>
-        <a href="#contact" class="nav-link hover:text-white">Contact</a>
-      </div>
+      <!-- Center: Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1 text-sm font-body font-medium">
+        <a href="#offres" class="badge-amber px-3 py-1.5 rounded-full text-xs font-bold tracking-wide">Offres Express</a>
+        <a href="#a-propos" class="nav-link px-3 py-2 text-gray-300 hover:text-white">À propos</a>
+        <a href="#demos" class="nav-link px-3 py-2 text-gray-300 hover:text-white">Démos</a>
+        <a href="#methode" class="nav-link px-3 py-2 text-gray-300 hover:text-white">Méthode</a>
+        <a href="#simulateur" class="nav-link px-3 py-2 text-gray-300 hover:text-white">Outils &amp; Devis</a>
+        <a href="#stack" class="nav-link px-3 py-2 text-gray-300 hover:text-white">Stack IA</a>
+        <a href="#briefs" class="nav-link px-3 py-2 text-gray-300 hover:text-white">Briefs</a>
+        <a href="#contact" class="nav-link px-3 py-2 text-gray-300 hover:text-white">Contact</a>
+      </nav>
 
-      <!-- CTA + Burger -->
-      <div class="flex items-center gap-4">
-        <a href="#contact" class="hidden md:inline-flex btn-lime px-6 py-2.5 rounded-full text-sm tracking-wide">
-          DÉMARRER
+      <!-- Right: CTA + Burger -->
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/22893095094" target="_blank" class="btn-azure px-5 py-2.5 text-sm font-bold tracking-wide hidden sm:inline-flex items-center gap-2 rounded-xl">
+          <i data-lucide="message-square" class="w-4 h-4"></i> Me contacter
         </a>
-        <button id="burger" class="md:hidden flex flex-col gap-1.5 p-2 focus:outline-none" aria-label="Menu">
+        <button id="burger" class="lg:hidden flex flex-col gap-1.5 p-2 focus:outline-none" aria-label="Menu de navigation">
           <span class="block w-6 h-[2px] bg-white transition-all" id="bar1"></span>
           <span class="block w-6 h-[2px] bg-white transition-all" id="bar2"></span>
-          <span class="block w-4 h-[2px] bg-lime transition-all ml-auto" id="bar3"></span>
+          <span class="block w-4 h-[2px] bg-azure-light transition-all ml-auto" id="bar3"></span>
         </button>
       </div>
     </div>
-  </nav>
+  </header>
 
   <!-- Mobile Menu -->
-  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-40 bg-forest-950/98 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 px-6">
-    <a href="#hero" onclick="closeMenu()" class="text-3xl font-display font-800 text-white hover:text-lime">Accueil</a>
-    <a href="#about" onclick="closeMenu()" class="text-3xl font-display font-800 text-white hover:text-lime">À propos</a>
-    <a href="#services" onclick="closeMenu()" class="text-3xl font-display font-800 text-white hover:text-lime">Services</a>
-    <a href="#projects" onclick="closeMenu()" class="text-3xl font-display font-800 text-white hover:text-lime">Projets</a>
-    <a href="#contact" onclick="closeMenu()" class="btn-lime px-10 py-3.5 rounded-full text-lg mt-4 w-full max-w-xs text-center">DÉMARRER</a>
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-40 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 px-6" style="background: rgba(5, 9, 20, 0.98);">
+    <a href="#offres" onclick="closeMenu()" class="badge-amber px-5 py-2 rounded-full text-base font-bold">Offres Express</a>
+    <a href="#a-propos" onclick="closeMenu()" class="text-2xl font-display font-800 text-white hover:text-azure-light">À propos</a>
+    <a href="#demos" onclick="closeMenu()" class="text-2xl font-display font-800 text-white hover:text-azure-light">Démos</a>
+    <a href="#methode" onclick="closeMenu()" class="text-2xl font-display font-800 text-white hover:text-azure-light">Méthode</a>
+    <a href="#simulateur" onclick="closeMenu()" class="text-2xl font-display font-800 text-white hover:text-azure-light">Outils &amp; Devis</a>
+    <a href="#stack" onclick="closeMenu()" class="text-2xl font-display font-800 text-white hover:text-azure-light">Stack IA</a>
+    <a href="#briefs" onclick="closeMenu()" class="text-2xl font-display font-800 text-white hover:text-azure-light">Briefs</a>
+    <a href="#contact" onclick="closeMenu()" class="text-2xl font-display font-800 text-white hover:text-azure-light">Contact</a>
+    <a href="https://wa.me/22893095094" target="_blank" onclick="closeMenu()" class="btn-azure px-10 py-3.5 rounded-xl text-lg mt-4 w-full max-w-xs text-center font-bold">Me contacter</a>
   </div>
 
-  <!-- ============ HERO (100vh) ============ -->
-  <section id="hero" class="relative min-h-screen flex flex-col justify-between overflow-x-hidden" style="background: radial-gradient(circle at 65% 40%, #2D6427 0%, #24521F 45%, #1B3F17 100%);">
+  <!-- ============ SECTION 1: HERO (#accueil) ============ -->
+  <section id="accueil" class="relative min-h-screen overflow-hidden" style="background: radial-gradient(ellipse at 75% 50%, #1D56E8 0%, #0E34A0 30%, #06102E 65%, #050914 100%);">
+    <!-- Grid pattern overlay -->
+    <div class="absolute inset-0 hero-grid-pattern pointer-events-none"></div>
 
-    <!-- Canvas 3D Constellation (Three.js) -->
-    <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-28 sm:pt-32 lg:pt-36 pb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center min-h-[calc(100vh-10rem)]">
 
-    <!-- Diamond Shape (Background) -->
-    <div class="diamond hidden md:block"></div>
-
-    <!-- Portrait Artistique Central (Style Ovilix / Rexton) -->
-    <div class="hero-portrait-container">
-      <div class="portrait-halo"></div>
-      <img src="./hero-portrait.png" 
-           alt="RODIS STUDIO — Création Digitale Artistique" 
-           class="hero-portrait-img">
-    </div>
-
-    <!-- Middle content (Foreground) -->
-    <div class="flex-1 flex items-center relative z-20">
-      <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 w-full grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 items-center pt-28 md:pt-24 pb-6">
-
-        <!-- Left -->
-        <div class="relative z-20">
-          <p class="text-lime text-xs sm:text-sm font-semibold tracking-widest uppercase mb-4 sm:mb-6 drop-shadow-md">
-            Agence Digitale • Lomé, Togo
-          </p>
-          <p class="text-base sm:text-lg lg:text-xl font-normal leading-relaxed text-[#F0FDF4] max-w-lg mb-8 sm:mb-10 drop-shadow-[0_2px_10px_rgba(20,46,18,0.7)]">
-            Nous concevons des solutions digitales percutantes connectées à WhatsApp qui élèvent votre présence et accélèrent vos ventes à Lomé.
-          </p>
-          <a href="#contact" class="btn-ghost inline-flex items-center gap-3 px-7 sm:px-8 py-3.5 rounded-full text-base font-semibold tracking-wide backdrop-blur-sm bg-forest-950/30">
-            Lancer un projet <span class="text-lime text-xl font-bold">↗</span>
-          </a>
-        </div>
-
-        <!-- Right keywords -->
-        <div class="hidden md:flex flex-col items-end gap-5 relative z-20 pr-4 select-none">
-          <span class="font-display font-800 text-4xl lg:text-5xl italic text-white/40 tracking-wider drop-shadow-md">INNOVER</span>
-          <span class="font-display font-800 text-4xl lg:text-5xl italic text-white/40 tracking-wider drop-shadow-md">GRANDIR</span>
-          <span class="font-display font-800 text-4xl lg:text-5xl italic text-lime tracking-wider drop-shadow-[0_0_20px_rgba(57,229,27,0.5)]">CONVERTIR</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Giant Title at Bottom (Responsive 375px Fix & Foreground z-20) -->
-    <div class="w-full overflow-hidden pb-6 md:pb-10 px-4 sm:px-6 lg:px-10 relative z-20">
-      <!-- Mobile (< md) : 2 lignes 100% lisibles sans coupure -->
-      <div class="block md:hidden text-center select-none font-display font-800 leading-[0.92] tracking-tighter">
-        <div class="text-white text-[17vw] drop-shadow-[0_4px_16px_rgba(20,46,18,0.8)]">RODIS</div>
-        <div class="text-lime text-[17vw] flex items-center justify-center drop-shadow-[0_0_25px_rgba(57,229,27,0.4)]">
-          STUDIO<sup class="text-[5vw] align-super ml-1 font-bold">®</sup>
-        </div>
-      </div>
-
-      <!-- Desktop (>= md) : Pleine largeur en une ligne -->
-      <h1 class="hidden md:block font-display font-800 text-[11.8vw] leading-none tracking-tighter text-center whitespace-nowrap select-none drop-shadow-[0_4px_20px_rgba(20,46,18,0.8)]">
-        <span class="text-white">RODIS</span> <span class="text-lime">STUDIO<sup class="text-[3vw] align-super font-bold">®</sup></span>
-      </h1>
-    </div>
-  </section>
-
-  <!-- ============ À PROPOS ============ -->
-  <section id="about" class="py-24 sm:py-32 lg:py-40 overflow-x-hidden relative z-20" style="background: linear-gradient(180deg, #1B3F17 0%, #24521F 50%, #2D6427 100%);">
-    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start">
-        <div>
-          <p class="text-lime text-xs sm:text-sm font-semibold tracking-widest uppercase mb-4 sm:mb-6">À propos</p>
-          <h2 class="font-display font-800 text-3xl sm:text-4xl lg:text-6xl leading-tight text-white">
-            Des sites qui<br>
-            <span class="text-lime">convertissent.</span>
-          </h2>
-        </div>
-        <div class="flex flex-col gap-6 sm:gap-8">
-          <p class="text-[#F0FDF4] text-base sm:text-lg font-normal leading-relaxed">
-            RODIS STUDIO est une agence digitale nouvelle génération basée à Lomé. Nous créons des sites vitrines, des boutiques en ligne et des identités visuelles pensés pour transformer vos visiteurs en clients — directement sur WhatsApp.
-          </p>
-          <p class="text-[#F0FDF4] text-base sm:text-lg font-normal leading-relaxed">
-            Pas d'abonnement. Pas de complexité. Un site clé en main livré en 48h, connecté à votre WhatsApp Business. Simple, rapide, efficace.
+        <!-- Left Column (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col gap-6 sm:gap-8 min-w-0">
+          <!-- Surtitle -->
+          <p class="text-azure-light text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase">
+            AGENCE DIGITALE &amp; VIBE CODING À LOMÉ DEPUIS 2026
           </p>
 
-          <!-- Statistiques Responsive 3 Colonnes Équilibrées -->
-          <div class="grid grid-cols-3 gap-2 sm:gap-6 pt-8 border-t border-white/20 px-2 sm:px-5 text-center">
-            <div class="flex flex-col items-center">
-              <span class="font-display font-800 text-3xl sm:text-4xl lg:text-5xl text-lime">48h</span>
-              <p class="text-[#F0FDF4] text-sm sm:text-base font-medium mt-1">Livraison</p>
+          <!-- Main Title -->
+          <h1 class="font-display font-900 leading-[1.05] tracking-tight title-clamp-lg text-white">
+            Le digital dans tes mains, des boutiques <span class="text-[#38BDF8]">qui cartonnent.</span>
+          </h1>
+
+          <!-- Description -->
+          <p class="text-gray-300 text-base sm:text-lg leading-relaxed max-w-xl">
+            Je m'appelle <strong class="text-white">Sidoine BEDI</strong>. Je conçois des boutiques e-commerce Express connectées à WhatsApp (<strong class="text-[#38BDF8]">0&nbsp;FCFA d'abonnement/mois</strong>), des sites B2B avec simulateur de devis, des PWA et des vitrines 3D pour faire décoller tes ventes.
+          </p>
+
+          <!-- Search Bar -->
+          <div class="flex items-center gap-2 w-full max-w-xl rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5" style="background: rgba(5, 11, 26, 0.9); border: 1px solid rgba(255,255,255,0.15);">
+            <i data-lucide="search" class="w-5 h-5 text-gray-500 shrink-0"></i>
+            <input type="text" id="heroSearch" placeholder="Cherche une démo : streetwear, cosmétiques, B2B, 3D, devis..." class="flex-1 bg-transparent border-none text-sm text-white placeholder:text-gray-500 focus:outline-none min-w-0">
+            <button onclick="handleHeroSearch()" class="btn-azure px-4 py-2 text-sm font-bold rounded-xl shrink-0">Explorer</button>
+          </div>
+
+          <!-- 4 Counters -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+            <div class="text-center sm:text-left">
+              <span class="font-display font-900 text-2xl sm:text-3xl text-white">0 FCFA</span>
+              <p class="text-gray-400 text-xs sm:text-sm mt-1">Abonnement mensuel</p>
             </div>
-            <div class="flex flex-col items-center">
-              <span class="font-display font-800 text-3xl sm:text-4xl lg:text-5xl text-lime">100%</span>
-              <p class="text-[#F0FDF4] text-sm sm:text-base font-medium mt-1">Clé en main</p>
+            <div class="text-center sm:text-left">
+              <span class="font-display font-900 text-2xl sm:text-3xl text-white">24h-48h</span>
+              <p class="text-gray-400 text-xs sm:text-sm mt-1">Livraison Vibe Coding</p>
             </div>
-            <div class="flex flex-col items-center">
-              <span class="font-display font-800 text-3xl sm:text-4xl lg:text-5xl text-lime">0</span>
-              <p class="text-[#F0FDF4] text-sm sm:text-base font-medium mt-1">Abonnement</p>
+            <div class="text-center sm:text-left">
+              <span class="font-display font-900 text-2xl sm:text-3xl text-white">6+</span>
+              <p class="text-gray-400 text-xs sm:text-sm mt-1">Démos en production</p>
+            </div>
+            <div class="text-center sm:text-left">
+              <span class="font-display font-900 text-2xl sm:text-3xl text-white">100%</span>
+              <p class="text-gray-400 text-xs sm:text-sm mt-1">Connecté à WhatsApp</p>
             </div>
           </div>
         </div>
+
+        <!-- Right Column (5 cols) — Portrait -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-end relative min-w-0">
+          <div class="relative">
+            <!-- Arch Container -->
+            <div class="arch-container w-64 sm:w-72 md:w-80 lg:w-96 aspect-[3/4] relative" style="background: linear-gradient(180deg, #1D56E8 0%, #0E34A0 60%, #06102E 100%); box-shadow: 0 0 80px rgba(29, 86, 232, 0.4), 0 0 160px rgba(29, 86, 232, 0.15);">
+              <img src="hero-portrait.png" alt="Sidoine BEDI — Fondateur RODIS STUDIO®" class="w-full h-full object-cover object-top" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80'">
+            </div>
+
+            <!-- Floating Glass Card -->
+            <div class="glass-card absolute -bottom-4 -left-6 sm:-left-10 px-5 py-4 rounded-2xl z-20 max-w-[220px]">
+              <p class="font-display font-800 text-white text-sm sm:text-base">Sidoine BEDI</p>
+              <p class="text-[#38BDF8] text-xs sm:text-sm font-medium mt-0.5">Fondateur &amp; Lead Dev RODIS STUDIO®</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ============ PROJETS RÉCENTS ============ -->
-  <section id="projects" class="py-24 sm:py-32 lg:py-40 overflow-x-hidden relative z-20" style="background: #1B3F17;">
-    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10">
+
+  <!-- ============ SECTION 2: OFFRES (#offres) ============ -->
+  <section id="offres" class="relative py-20 sm:py-28 lg:py-36 overflow-hidden" style="background: #070D1F;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
 
       <!-- Header -->
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 sm:mb-20">
-        <div>
-          <p class="text-lime text-xs sm:text-sm font-semibold tracking-widest uppercase mb-4 sm:mb-6">Portfolio</p>
-          <h2 class="font-display font-800 text-3xl sm:text-4xl lg:text-6xl leading-tight text-white">Projets récents</h2>
-        </div>
-        <p class="text-[#F0FDF4] text-base sm:text-lg font-normal max-w-sm">Des réalisations concrètes, en production, qui génèrent des résultats pour nos clients.</p>
+      <div class="mb-14 sm:mb-20">
+        <p class="text-azure-light text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-4">NOS SOLUTIONS</p>
+        <h2 class="font-display font-900 title-clamp text-white mb-3">Passe au niveau supérieur</h2>
+        <p class="text-gray-400 text-base sm:text-lg max-w-xl">Tu veux aller plus vite ? Découvre nos solutions clé-en-main, ou confie-moi tes projets.</p>
       </div>
 
-      <!-- Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+      <!-- 2 Banner Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
 
-        <!-- Card 01 : MR PROPRE -->
-        <div class="project-card group rounded-2xl overflow-hidden border border-white/15 bg-forest-800/80 shadow-lg">
-          <div class="h-52 md:h-64 w-full relative overflow-hidden bg-forest-900">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80" 
-                 alt="MR PROPRE Lomé - Architecture et Entretien" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-forest-900/90 via-transparent to-black/20"></div>
-            <div class="absolute top-4 left-4 z-10">
-              <span class="text-xs sm:text-sm font-bold tracking-wider uppercase text-lime bg-forest-950/85 border border-lime/40 px-3.5 py-1.5 rounded-full backdrop-blur-md shadow-md">
-                Services B2B & Devis WhatsApp
-              </span>
+        <!-- Card 1: Boutique Express -->
+        <div class="card-dark rounded-3xl overflow-hidden">
+          <!-- Top gradient zone -->
+          <div class="relative p-6 sm:p-8 lg:p-10 concentric-circles" style="background: linear-gradient(135deg, #092268 0%, #1E63EC 100%);">
+            <!-- Icon box + pills -->
+            <div class="flex flex-wrap items-center gap-3 mb-6">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background: rgba(255,255,255,0.12); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2);">
+                <i data-lucide="shopping-cart" class="w-7 h-7 text-white"></i>
+              </div>
+              <span class="px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 border border-white/20 text-white">Panier WhatsApp</span>
+              <span class="px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 border border-white/20 text-white">0 FCFA / mois</span>
+              <span class="px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 border border-white/20 text-white">Showroom 360° &amp; 3D</span>
             </div>
+            <p class="text-azure-light text-xs font-semibold tracking-[0.2em] uppercase mb-2">Solution #1</p>
+            <h3 class="font-display font-900 text-2xl sm:text-3xl lg:text-4xl text-white leading-tight">BOUTIQUE EXPRESS ET E-COMMERCE</h3>
           </div>
-          <div class="p-6 sm:p-8 lg:p-10">
-            <h3 class="font-display font-800 text-2xl sm:text-3xl text-white mb-3">MR PROPRE Lomé</h3>
-            <p class="text-[#F0FDF4] text-base sm:text-lg font-normal leading-relaxed mb-6 sm:mb-8">
-              Site vitrine professionnel avec simulateur de devis interactif connecté à WhatsApp, identité visuelle complète et application mobile PWA.
+          <!-- Bottom dark zone -->
+          <div class="p-6 sm:p-8 lg:p-10" style="background: #0B1224;">
+            <h4 class="font-display font-800 text-lg sm:text-xl text-white mb-3">Boutiques Express WhatsApp &amp; Vitrines 3D</h4>
+            <p class="text-gray-400 text-sm sm:text-base leading-relaxed mb-6 max-w-2xl">
+              Catalogue interactif avec panier automatique en FCFA, commande directe sur WhatsApp, showroom 360° Three.js et design streetwear premium. Zéro abonnement mensuel, livraison en 24-48h.
             </p>
-            <a href="./mr-propre/index.html" class="inline-flex items-center gap-2 text-lime hover:text-lime-light text-base sm:text-lg font-bold tracking-wide transition-all duration-300">
-              Voir le site en direct <span>↗</span>
+            <a href="#demos" class="btn-azure inline-flex items-center gap-2 px-6 py-3 text-sm font-bold rounded-xl">
+              Découvrir les démos <span>↗</span>
             </a>
           </div>
         </div>
 
-        <!-- Card 02 : EMMA BEAUTY -->
-        <div class="project-card group rounded-2xl overflow-hidden border border-white/15 bg-forest-800/80 shadow-lg">
-          <div class="h-52 md:h-64 w-full relative overflow-hidden bg-forest-900">
-            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80" 
-                 alt="EMMA BEAUTY - Cosmétiques et Beauté" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-forest-900/90 via-transparent to-black/20"></div>
-            <div class="absolute top-4 left-4 z-10">
-              <span class="text-xs sm:text-sm font-bold tracking-wider uppercase text-lime bg-forest-950/85 border border-lime/40 px-3.5 py-1.5 rounded-full backdrop-blur-md shadow-md">
-                Boutique E-Commerce Cosmétiques
-              </span>
+        <!-- Card 2: Services B2B -->
+        <div class="card-dark rounded-3xl overflow-hidden">
+          <!-- Top gradient zone (Amber) -->
+          <div class="relative p-6 sm:p-8 lg:p-10 concentric-circles" style="background: linear-gradient(135deg, #4A1D09 0%, #B4410E 50%, #EA580C 100%);">
+            <div class="flex flex-wrap items-center gap-3 mb-6">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background: rgba(255,255,255,0.12); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2);">
+                <i data-lucide="briefcase" class="w-7 h-7 text-white"></i>
+              </div>
+              <span class="px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 border border-white/20 text-white">Devis en FCFA</span>
+              <span class="px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 border border-white/20 text-white">App PWA</span>
+              <span class="px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 border border-white/20 text-white">Spots Google Flow</span>
             </div>
+            <p class="text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase mb-2">Solution #2</p>
+            <h3 class="font-display font-900 text-2xl sm:text-3xl lg:text-4xl text-white leading-tight">SERVICES B2B, PWA ET MOTION IA</h3>
           </div>
-          <div class="p-6 sm:p-8 lg:p-10">
-            <h3 class="font-display font-800 text-2xl sm:text-3xl text-white mb-3">EMMA BEAUTY</h3>
-            <p class="text-[#F0FDF4] text-base sm:text-lg font-normal leading-relaxed mb-6 sm:mb-8">
-              Catalogue interactif de soins et maquillage avec panier automatique et commande directe sur WhatsApp en FCFA.
+          <!-- Bottom dark zone -->
+          <div class="p-6 sm:p-8 lg:p-10" style="background: #0B1224;">
+            <h4 class="font-display font-800 text-lg sm:text-xl text-white mb-3">Sites B2B, Applications PWA &amp; Pubs TikTok</h4>
+            <p class="text-gray-400 text-sm sm:text-base leading-relaxed mb-6 max-w-2xl">
+              Sites vitrines professionnels avec simulateur de devis interactif en FCFA, PWA installable sur mobile, spots publicitaires verticaux 9:16 générés avec Google Flow pour TikTok et Reels.
             </p>
-            <a href="https://wa.me/22893789708" target="_blank" class="inline-flex items-center gap-2 text-lime hover:text-lime-light text-base sm:text-lg font-bold tracking-wide transition-all duration-300">
-              Voir la boutique (+228 93 78 97 08) <span>↗</span>
+            <a href="#simulateur" class="btn-azure inline-flex items-center gap-2 px-6 py-3 text-sm font-bold rounded-xl">
+              Simuler mon devis <span>↗</span>
             </a>
           </div>
         </div>
@@ -438,145 +485,717 @@
     </div>
   </section>
 
-  <!-- ============ SERVICES (TROIS PACKS) ============ -->
-  <section id="services" class="py-24 sm:py-32 lg:py-40 overflow-x-hidden relative z-20" style="background: linear-gradient(180deg, #24521F 0%, #1B3F17 100%);">
-    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10">
 
-      <!-- Header -->
-      <div class="mb-16 sm:mb-20">
-        <p class="text-lime text-xs sm:text-sm font-semibold tracking-widest uppercase mb-4 sm:mb-6">Ce qu'on fait</p>
-        <h2 class="font-display font-800 text-3xl sm:text-4xl lg:text-6xl leading-tight text-white max-w-2xl">
-          Trois packs.<br>
-          <span class="text-lime">Zéro abonnement.</span>
-        </h2>
-      </div>
+  <!-- ============ SECTION 3: QUI SUIS-JE ? (#a-propos) ============ -->
+  <section id="a-propos" class="relative py-20 sm:py-28 lg:py-36 overflow-hidden" style="background: #050914;">
+    <!-- Halo -->
+    <div class="absolute inset-0 halo-blue pointer-events-none"></div>
 
-      <!-- 3 Columns -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0">
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-10">
+      <p class="text-azure-light text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-4">À PROPOS</p>
+      <h2 class="font-display font-900 title-clamp text-white mb-8 sm:mb-10">Qui suis-je ?</h2>
 
-        <!-- Service 01 -->
-        <div class="service-col p-6 sm:p-8 lg:p-12 bg-forest-800/40 md:bg-transparent rounded-2xl md:rounded-none">
-          <span class="font-display font-800 text-5xl lg:text-6xl text-lime block mb-6">01</span>
-          <h3 class="font-display font-800 text-2xl text-white mb-4">Identité & Logo HD</h3>
-          <p class="text-[#F0FDF4] text-base sm:text-lg font-normal leading-relaxed mb-8">
-            Création ou refonte complète de votre marque professionnelle, livrée en 48h avec tous les fichiers sources HD.
-          </p>
-          <a href="#contact" class="inline-flex items-center gap-2 text-lime hover:text-lime-light text-base font-bold underline underline-offset-4">
-            Commander ce pack →
-          </a>
-        </div>
-
-        <!-- Service 02 -->
-        <div class="service-col p-6 sm:p-8 lg:p-12 bg-forest-800/40 md:bg-transparent rounded-2xl md:rounded-none md:border-l md:border-r border-white/15">
-          <span class="font-display font-800 text-5xl lg:text-6xl text-lime block mb-6">02</span>
-          <h3 class="font-display font-800 text-2xl text-white mb-4">Site Vitrine & Devis WhatsApp</h3>
-          <p class="text-[#F0FDF4] text-base sm:text-lg font-normal leading-relaxed mb-8">
-            Idéal pour entreprises de services, BTP, nettoyage et agences. Vos prospects calculent et commandent en un clic.
-          </p>
-          <a href="#contact" class="inline-flex items-center gap-2 text-lime hover:text-lime-light text-base font-bold underline underline-offset-4">
-            Commander ce pack →
-          </a>
-        </div>
-
-        <!-- Service 03 -->
-        <div class="service-col p-6 sm:p-8 lg:p-12 bg-forest-800/40 md:bg-transparent rounded-2xl md:rounded-none">
-          <span class="font-display font-800 text-5xl lg:text-6xl text-lime block mb-6">03</span>
-          <h3 class="font-display font-800 text-2xl text-white mb-4">Boutique Express WhatsApp</h3>
-          <p class="text-[#F0FDF4] text-base sm:text-lg font-normal leading-relaxed mb-8">
-            Catalogue interactif avec panier automatique en FCFA. Parfait pour prêt-à-porter, cosmétiques, beauté et restaurants.
-          </p>
-          <a href="#contact" class="inline-flex items-center gap-2 text-lime hover:text-lime-light text-base font-bold underline underline-offset-4">
-            Commander ce pack →
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT & SIMULATEUR ============ -->
-  <section id="contact" class="py-24 sm:py-32 lg:py-40 overflow-x-hidden relative z-20" style="background: #1B3F17;">
-    <div class="max-w-3xl mx-auto px-5 sm:px-6 lg:px-10">
-
-      <!-- Header -->
-      <div class="text-center mb-12 sm:mb-16">
-        <p class="text-lime text-xs sm:text-sm font-semibold tracking-widest uppercase mb-4 sm:mb-6">Contact direct</p>
-        <h2 class="font-display font-800 text-3xl sm:text-4xl lg:text-5xl leading-tight text-white mb-4 sm:mb-6">
-          Lancez votre projet<span class="text-lime">.</span>
-        </h2>
-        <p class="text-[#F0FDF4] font-normal text-base sm:text-lg max-w-lg mx-auto">
-          Dites-nous ce qu'il vous faut. On vous répond directement sur WhatsApp en moins de 2h.
+      <div class="flex flex-col gap-6 mb-12">
+        <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
+          Je suis <strong class="text-white">Sidoine BEDI</strong>, développeur web et directeur créatif basé à <strong class="text-white">Lomé, Togo</strong>. Depuis <strong class="text-white">2026</strong>, je pratique le <strong class="text-[#38BDF8]">Vibe Coding</strong> — une approche où l'intelligence artificielle accélère chaque étape de la conception : design, code, animation 3D et motion. Mon objectif : permettre aux commerçants et entrepreneurs africains de posséder des sites e-commerce professionnels <strong class="text-white">sans jamais payer d'abonnement mensuel</strong>.
+        </p>
+        <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
+          Avec <strong class="text-white">RODIS STUDIO®</strong>, je livre des boutiques Express WhatsApp, des sites B2B avec simulateur de devis, des applications PWA et des vitrines interactives 3D — le tout en 24 à 48 heures. Chaque projet est pensé mobile-first, optimisé Google et connecté à WhatsApp Business pour une conversion directe.
         </p>
       </div>
 
-      <!-- Form Card -->
-      <div class="rounded-2xl border border-white/20 bg-forest-800/80 p-6 sm:p-8 lg:p-12 shadow-2xl">
-        <form id="contactForm" class="flex flex-col gap-6">
-
-          <!-- Nom -->
-          <div>
-            <label class="text-[#F0FDF4] text-xs font-bold tracking-widest uppercase mb-2 block">Votre nom</label>
-            <input type="text" id="clientName" placeholder="Ex : Kofi Mensah" required
-              class="w-full px-5 py-4 rounded-xl text-base font-normal placeholder:text-white/40">
-          </div>
-
-          <!-- Service -->
-          <div>
-            <label class="text-[#F0FDF4] text-xs font-bold tracking-widest uppercase mb-2 block">Service souhaité</label>
-            <select id="serviceType" required class="w-full px-5 py-4 rounded-xl text-base font-normal appearance-none cursor-pointer">
-              <option value="" disabled selected>Choisir un service</option>
-              <option value="Logo & Identité Visuelle">01 — Logo & Identité Visuelle</option>
-              <option value="Site Vitrine & Devis WhatsApp">02 — Site Vitrine & Devis WhatsApp</option>
-              <option value="Boutique Express WhatsApp">03 — Boutique Express WhatsApp</option>
-            </select>
-          </div>
-
-          <!-- Secteur -->
-          <div>
-            <label class="text-[#F0FDF4] text-xs font-bold tracking-widest uppercase mb-2 block">Secteur d'activité</label>
-            <select id="sector" required class="w-full px-5 py-4 rounded-xl text-base font-normal appearance-none cursor-pointer">
-              <option value="" disabled selected>Choisir un secteur</option>
-              <option value="Nettoyage & Entretien">Nettoyage & Entretien</option>
-              <option value="Beauté & Cosmétiques">Beauté & Cosmétiques</option>
-              <option value="Restauration & Food">Restauration & Food</option>
-              <option value="Mode & Prêt-à-porter">Mode & Prêt-à-porter</option>
-              <option value="BTP & Construction">BTP & Construction</option>
-              <option value="Santé & Bien-être">Santé & Bien-être</option>
-              <option value="Commerce Général">Commerce Général</option>
-              <option value="Autre">Autre</option>
-            </select>
-          </div>
-
-          <!-- Submit -->
-          <button type="submit" class="btn-lime w-full py-4 rounded-xl text-base font-extrabold tracking-wide mt-2">
-            Envoyer sur WhatsApp (+228 93 09 50 94) ↗
-          </button>
-        </form>
+      <!-- 3 Stats -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="card-dark rounded-2xl p-6 text-center">
+          <span class="font-display font-900 text-3xl sm:text-4xl text-[#38BDF8] block">0 FCFA</span>
+          <p class="text-gray-400 text-sm font-medium mt-2">Zéro abonnement mensuel</p>
+        </div>
+        <div class="card-dark rounded-2xl p-6 text-center">
+          <span class="font-display font-900 text-3xl sm:text-4xl text-[#38BDF8] block">IA &amp; Vibe</span>
+          <p class="text-gray-400 text-sm font-medium mt-2">Design, code, 3D &amp; motion</p>
+        </div>
+        <div class="card-dark rounded-2xl p-6 text-center">
+          <span class="font-display font-900 text-3xl sm:text-4xl text-[#38BDF8] block">2026</span>
+          <p class="text-gray-400 text-sm font-medium mt-2">Lomé &amp; expédition mondiale</p>
+        </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ============ FOOTER ============ -->
-  <footer class="border-t border-white/10 relative z-20" style="background: #142E12;">
-    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 py-12 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-      <div class="flex flex-col sm:flex-row items-center gap-3">
-        <span class="font-display font-800 text-xl text-white">Rodis<span class="text-lime">.</span></span>
-        <span class="hidden sm:inline text-white/30 text-sm">—</span>
-        <span class="text-[#F0FDF4] text-sm font-medium">RODIS STUDIO® — Agence Digitale • Lomé, Togo</span>
+
+  <!-- ============ SECTION 4: CATALOGUE DE DÉMOS (#demos) ============ -->
+  <section id="demos" class="relative py-20 sm:py-28 lg:py-36 overflow-hidden" style="background: #070D1F;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+
+      <!-- Header -->
+      <div class="mb-10 sm:mb-14">
+        <p class="text-azure-light text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-4">PORTFOLIO</p>
+        <h2 class="font-display font-900 title-clamp text-white mb-4">Teste la démo, commande ton site</h2>
       </div>
-      <div class="flex items-center gap-6 sm:gap-8">
-        <a href="https://wa.me/22893095094" target="_blank" class="text-lime text-base font-bold hover:underline underline-offset-4">
-          +228 93 09 50 94
+
+      <!-- Filter Pills -->
+      <div class="flex flex-wrap gap-2 sm:gap-3 mb-10 sm:mb-14" id="demoFilters">
+        <button class="filter-pill active px-4 py-2 rounded-full text-sm font-semibold" data-filter="all">Tous</button>
+        <button class="filter-pill px-4 py-2 rounded-full text-sm font-semibold" data-filter="ecommerce">E-commerce WhatsApp</button>
+        <button class="filter-pill px-4 py-2 rounded-full text-sm font-semibold" data-filter="b2b">B2B &amp; PWA</button>
+        <button class="filter-pill px-4 py-2 rounded-full text-sm font-semibold" data-filter="3d">3D &amp; Streetwear</button>
+        <button class="filter-pill px-4 py-2 rounded-full text-sm font-semibold" data-filter="motion">Motion Design IA</button>
+      </div>
+
+      <!-- Demo Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" id="demoGrid">
+
+        <!-- Demo 1: Fitted By Buzz -->
+        <div class="card-dark rounded-2xl overflow-hidden demo-card" data-categories="ecommerce 3d">
+          <div class="relative h-48 sm:h-52 overflow-hidden bg-navy-800 group">
+            <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=800&q=80" alt="Fitted By Buzz Showroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-800/90 via-transparent to-black/20"></div>
+            <div class="absolute top-3 left-3">
+              <span class="text-xs font-bold tracking-wider uppercase text-white bg-navy-950/80 border border-azure-light/30 px-3 py-1.5 rounded-full backdrop-blur-md">Streetwear &amp; Luxe</span>
+            </div>
+            <a href="https://rodis-studio.github.io/fitted-by-buzz/" target="_blank" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
+                <i data-lucide="play" class="w-6 h-6 text-white fill-white"></i>
+              </div>
+            </a>
+          </div>
+          <div class="p-5 sm:p-6">
+            <span class="inline-block px-2.5 py-1 rounded-md text-xs font-bold bg-azure/20 text-azure-light mb-3">E-commerce 3D</span>
+            <h3 class="font-display font-800 text-base sm:text-lg text-white mb-2">Fitted By Buzz® — Showroom Officiel</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">Tunnel en 3 écrans, streetwear &amp; luxe. Panier WhatsApp automatique en FCFA.</p>
+            <div class="flex flex-wrap gap-2">
+              <a href="https://rodis-studio.github.io/fitted-by-buzz/" target="_blank" class="btn-ghost px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">▶ Voir la démo</a>
+              <a href="https://wa.me/22893095094?text=Bonjour%20Sidoine%20%F0%9F%91%8B%20Je%20veux%20un%20site%20comme%20Fitted%20By%20Buzz" target="_blank" class="btn-azure px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">Commander ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo 2: Mr Propre -->
+        <div class="card-dark rounded-2xl overflow-hidden demo-card" data-categories="b2b">
+          <div class="relative h-48 sm:h-52 overflow-hidden bg-navy-800 group">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Mr Propre Lomé" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-800/90 via-transparent to-black/20"></div>
+            <div class="absolute top-3 left-3">
+              <span class="text-xs font-bold tracking-wider uppercase text-white bg-navy-950/80 border border-azure-light/30 px-3 py-1.5 rounded-full backdrop-blur-md">B2B &amp; Devis</span>
+            </div>
+            <a href="https://rodis-studio.github.io/mr-propre/" target="_blank" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
+                <i data-lucide="play" class="w-6 h-6 text-white fill-white"></i>
+              </div>
+            </a>
+          </div>
+          <div class="p-5 sm:p-6">
+            <span class="inline-block px-2.5 py-1 rounded-md text-xs font-bold bg-azure/20 text-azure-light mb-3">B2B &amp; PWA</span>
+            <h3 class="font-display font-800 text-base sm:text-lg text-white mb-2">Mr Propre Lomé — Nettoyage &amp; Espaces Verts</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">Devis instantané en FCFA &amp; PWA installable. Simulateur de prix connecté à WhatsApp.</p>
+            <div class="flex flex-wrap gap-2">
+              <a href="https://rodis-studio.github.io/mr-propre/" target="_blank" class="btn-ghost px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">▶ Voir la démo</a>
+              <a href="https://wa.me/22893095094?text=Bonjour%20Sidoine%20%F0%9F%91%8B%20Je%20veux%20un%20site%20comme%20Mr%20Propre" target="_blank" class="btn-azure px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">Commander ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo 3: Emma Beauty (Glam) -->
+        <div class="card-dark rounded-2xl overflow-hidden demo-card" data-categories="ecommerce">
+          <div class="relative h-48 sm:h-52 overflow-hidden bg-navy-800 group">
+            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80" alt="Emma Beauty Glam" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-800/90 via-transparent to-black/20"></div>
+            <div class="absolute top-3 left-3">
+              <span class="text-xs font-bold tracking-wider uppercase text-white bg-navy-950/80 border border-azure-light/30 px-3 py-1.5 rounded-full backdrop-blur-md">Cosmétiques</span>
+            </div>
+            <a href="https://rodis-studio.github.io/glam/" target="_blank" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
+                <i data-lucide="play" class="w-6 h-6 text-white fill-white"></i>
+              </div>
+            </a>
+          </div>
+          <div class="p-5 sm:p-6">
+            <span class="inline-block px-2.5 py-1 rounded-md text-xs font-bold bg-azure/20 text-azure-light mb-3">E-commerce WhatsApp</span>
+            <h3 class="font-display font-800 text-base sm:text-lg text-white mb-2">Emma Beauty (Glam) — Boutique Beauté</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">Cosmétiques &amp; soins, 0 FCFA/mois. Catalogue interactif avec panier WhatsApp automatique.</p>
+            <div class="flex flex-wrap gap-2">
+              <a href="https://rodis-studio.github.io/glam/" target="_blank" class="btn-ghost px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">▶ Voir la démo</a>
+              <a href="https://wa.me/22893095094?text=Bonjour%20Sidoine%20%F0%9F%91%8B%20Je%20veux%20un%20site%20comme%20Emma%20Beauty" target="_blank" class="btn-azure px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">Commander ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo 4: Kulture 228 -->
+        <div class="card-dark rounded-2xl overflow-hidden demo-card" data-categories="3d">
+          <div class="relative h-48 sm:h-52 overflow-hidden bg-navy-800 group">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=800&q=80" alt="Kulture 228 Vitrine 3D" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-800/90 via-transparent to-black/20"></div>
+            <div class="absolute top-3 left-3">
+              <span class="text-xs font-bold tracking-wider uppercase text-white bg-navy-950/80 border border-azure-light/30 px-3 py-1.5 rounded-full backdrop-blur-md">3D &amp; Three.js</span>
+            </div>
+            <a href="https://rodis-studio.github.io/fitted-by-buzz/" target="_blank" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
+                <i data-lucide="play" class="w-6 h-6 text-white fill-white"></i>
+              </div>
+            </a>
+          </div>
+          <div class="p-5 sm:p-6">
+            <span class="inline-block px-2.5 py-1 rounded-md text-xs font-bold bg-azure/20 text-azure-light mb-3">3D &amp; Streetwear</span>
+            <h3 class="font-display font-800 text-base sm:text-lg text-white mb-2">Kulture 228® — Vitrine Interactive 3D</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">Expérience Turntable 360° &amp; Three.js. Visualisation produit immersive en temps réel.</p>
+            <div class="flex flex-wrap gap-2">
+              <a href="https://rodis-studio.github.io/fitted-by-buzz/" target="_blank" class="btn-ghost px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">▶ Voir la démo</a>
+              <a href="https://wa.me/22893095094?text=Bonjour%20Sidoine%20%F0%9F%91%8B%20Je%20veux%20une%20vitrine%203D%20comme%20Kulture%20228" target="_blank" class="btn-azure px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">Commander ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo 5: Yan Trade House -->
+        <div class="card-dark rounded-2xl overflow-hidden demo-card" data-categories="b2b">
+          <div class="relative h-48 sm:h-52 overflow-hidden bg-navy-800 group">
+            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Yan Trade House" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-800/90 via-transparent to-black/20"></div>
+            <div class="absolute top-3 left-3">
+              <span class="text-xs font-bold tracking-wider uppercase text-white bg-navy-950/80 border border-azure-light/30 px-3 py-1.5 rounded-full backdrop-blur-md">Import-Export</span>
+            </div>
+            <a href="#simulateur" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
+                <i data-lucide="play" class="w-6 h-6 text-white fill-white"></i>
+              </div>
+            </a>
+          </div>
+          <div class="p-5 sm:p-6">
+            <span class="inline-block px-2.5 py-1 rounded-md text-xs font-bold bg-azure/20 text-azure-light mb-3">B2B &amp; PWA</span>
+            <h3 class="font-display font-800 text-base sm:text-lg text-white mb-2">Yan Trade House — Négoce &amp; Logistique</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">Portail Import-Export B2B Chine, Nigeria, France, USA. Simulateur de devis &amp; formulaire pro.</p>
+            <div class="flex flex-wrap gap-2">
+              <a href="#simulateur" class="btn-ghost px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">▶ Voir la démo</a>
+              <a href="https://wa.me/22893095094?text=Bonjour%20Sidoine%20%F0%9F%91%8B%20Je%20veux%20un%20site%20B2B%20comme%20Yan%20Trade%20House" target="_blank" class="btn-azure px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">Commander ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo 6: Spots Vidéo IA -->
+        <div class="card-dark rounded-2xl overflow-hidden demo-card" data-categories="motion">
+          <div class="relative h-48 sm:h-52 overflow-hidden bg-navy-800 group">
+            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80" alt="Spots Vidéo IA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-800/90 via-transparent to-black/20"></div>
+            <div class="absolute top-3 left-3">
+              <span class="text-xs font-bold tracking-wider uppercase text-white bg-navy-950/80 border border-azure-light/30 px-3 py-1.5 rounded-full backdrop-blur-md">Google Flow</span>
+            </div>
+            <a href="#briefs" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
+                <i data-lucide="play" class="w-6 h-6 text-white fill-white"></i>
+              </div>
+            </a>
+          </div>
+          <div class="p-5 sm:p-6">
+            <span class="inline-block px-2.5 py-1 rounded-md text-xs font-bold bg-azure/20 text-azure-light mb-3">Motion Design IA</span>
+            <h3 class="font-display font-800 text-base sm:text-lg text-white mb-2">Spots Vidéo IA — Acquisition Client</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">Publicités verticales 9:16 TikTok &amp; Reels sous Google Flow. Scripts IA prêts à l'emploi.</p>
+            <div class="flex flex-wrap gap-2">
+              <a href="#briefs" class="btn-ghost px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">▶ Voir la démo</a>
+              <a href="https://wa.me/22893095094?text=Bonjour%20Sidoine%20%F0%9F%91%8B%20Je%20veux%20un%20spot%20vid%C3%A9o%20IA%20TikTok" target="_blank" class="btn-azure px-4 py-2 rounded-xl text-xs font-bold inline-flex items-center gap-1.5">Commander ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SECTION 5: OUTILS EN LIGNE (#simulateur) ============ -->
+  <section id="simulateur" class="relative py-20 sm:py-28 lg:py-36 overflow-hidden" style="background: #050914;">
+    <div class="absolute inset-0 halo-blue pointer-events-none"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+
+      <!-- Header -->
+      <div class="mb-10 sm:mb-14">
+        <p class="text-azure-light text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-4">OUTILS EN LIGNE</p>
+        <h2 class="font-display font-900 title-clamp text-white mb-3">Utilise-les ici, sans compte</h2>
+        <p class="text-gray-400 text-base sm:text-lg max-w-xl">Tout fonctionne dans ton navigateur. Rien n'est envoyé nulle part.</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex flex-wrap gap-2 sm:gap-3 mb-8" id="toolTabs">
+        <button class="tool-tab tab-active px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold" data-tab="devis">Simulateur de Devis</button>
+        <button class="tool-tab filter-pill px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold" data-tab="whatsapp">Générateur wa.me</button>
+        <button class="tool-tab filter-pill px-4 sm:px-5 py-2.5 rounded-xl text-sm font-bold" data-tab="comparateur">Comparateur 0 FCFA</button>
+      </div>
+
+      <!-- Tool Panels Container -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+
+        <!-- LEFT PANEL: Input -->
+        <div class="card-dark rounded-2xl p-5 sm:p-6 lg:p-8">
+
+          <!-- Tab 1: Simulateur de Devis -->
+          <div id="panel-devis" class="tool-panel">
+            <h3 class="font-display font-800 text-lg text-white mb-6">Simulateur de Devis FCFA</h3>
+            <div class="flex flex-col gap-5">
+              <div>
+                <label class="text-gray-300 text-xs font-bold tracking-widest uppercase mb-2 block">Nom de ta marque</label>
+                <input type="text" id="devisBrand" placeholder="Ex : Ma Boutique Lomé" class="w-full px-4 py-3.5 rounded-xl text-sm placeholder:text-gray-600">
+              </div>
+              <div>
+                <label class="text-gray-300 text-xs font-bold tracking-widest uppercase mb-2 block">Type de projet</label>
+                <select id="devisType" class="w-full px-4 py-3.5 rounded-xl text-sm appearance-none cursor-pointer">
+                  <option value="75000">Boutique Express WhatsApp — dès 75 000 FCFA</option>
+                  <option value="95000">Site Vitrine B2B + Devis — dès 95 000 FCFA</option>
+                  <option value="130000">Showroom 360°/3D + PWA — dès 130 000 FCFA</option>
+                </select>
+              </div>
+              <div class="flex flex-col gap-3">
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <input type="checkbox" id="optionPWA" value="15000" class="w-5 h-5 rounded accent-azure">
+                  <span class="text-gray-300 text-sm">Installation PWA (+15 000 FCFA)</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <input type="checkbox" id="optionSpot" value="20000" class="w-5 h-5 rounded accent-azure">
+                  <span class="text-gray-300 text-sm">Spot Pub TikTok 9:16 IA (+20 000 FCFA)</span>
+                </label>
+              </div>
+              <button onclick="calculateDevis()" class="btn-azure w-full py-3.5 rounded-xl text-sm font-bold mt-2">
+                Calculer mon devis
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab 2: Générateur WhatsApp -->
+          <div id="panel-whatsapp" class="tool-panel hidden">
+            <h3 class="font-display font-800 text-lg text-white mb-6">Générateur de lien WhatsApp wa.me</h3>
+            <div class="flex flex-col gap-5">
+              <div>
+                <label class="text-gray-300 text-xs font-bold tracking-widest uppercase mb-2 block">Numéro (avec indicatif)</label>
+                <input type="text" id="waNumber" placeholder="Ex : 22893095094" class="w-full px-4 py-3.5 rounded-xl text-sm placeholder:text-gray-600">
+              </div>
+              <div>
+                <label class="text-gray-300 text-xs font-bold tracking-widest uppercase mb-2 block">Message pré-rempli</label>
+                <textarea id="waMessage" rows="4" placeholder="Ex : Bonjour 👋 Je suis intéressé par vos services..." class="w-full px-4 py-3.5 rounded-xl text-sm placeholder:text-gray-600 resize-none"></textarea>
+              </div>
+              <button onclick="generateWaLink()" class="btn-azure w-full py-3.5 rounded-xl text-sm font-bold mt-2">
+                Générer le lien
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab 3: Comparateur -->
+          <div id="panel-comparateur" class="tool-panel hidden">
+            <h3 class="font-display font-800 text-lg text-white mb-6">Comparateur Zéro Abonnement</h3>
+            <div class="flex flex-col gap-5">
+              <div>
+                <label class="text-gray-300 text-xs font-bold tracking-widest uppercase mb-2 block">Abonnement mensuel concurrent (FCFA)</label>
+                <input type="number" id="compMonthly" placeholder="Ex : 15000" class="w-full px-4 py-3.5 rounded-xl text-sm placeholder:text-gray-600">
+              </div>
+              <div>
+                <label class="text-gray-300 text-xs font-bold tracking-widest uppercase mb-2 block">Frais de mise en service concurrent (FCFA)</label>
+                <input type="number" id="compSetup" placeholder="Ex : 50000" class="w-full px-4 py-3.5 rounded-xl text-sm placeholder:text-gray-600">
+              </div>
+              <div>
+                <label class="text-gray-300 text-xs font-bold tracking-widest uppercase mb-2 block">Ton budget RODIS STUDIO (FCFA)</label>
+                <input type="number" id="compRodis" placeholder="Ex : 75000" class="w-full px-4 py-3.5 rounded-xl text-sm placeholder:text-gray-600">
+              </div>
+              <button onclick="calculateSavings()" class="btn-azure w-full py-3.5 rounded-xl text-sm font-bold mt-2">
+                Calculer mes économies
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT PANEL: Result -->
+        <div class="card-dark rounded-2xl p-5 sm:p-6 lg:p-8 flex flex-col">
+          <h3 class="font-display font-800 text-lg text-white mb-4">Résultat</h3>
+          <div id="toolResult" class="flex-1 p-4 sm:p-5 rounded-xl font-mono text-sm text-gray-300 leading-relaxed whitespace-pre-wrap min-h-[200px]" style="background: rgba(5, 9, 20, 0.85); border: 1px solid rgba(56, 152, 255, 0.1);">Remplis le formulaire à gauche et clique sur le bouton pour voir le résultat ici.</div>
+          <div class="flex flex-wrap gap-3 mt-5">
+            <button onclick="copyResult()" id="copyResultBtn" class="copy-btn btn-ghost px-5 py-2.5 rounded-xl text-sm font-bold inline-flex items-center gap-2">
+              <i data-lucide="copy" class="w-4 h-4"></i> Copier le texte
+            </button>
+            <a id="sendToSidoine" href="https://wa.me/22893095094" target="_blank" class="btn-azure px-5 py-2.5 rounded-xl text-sm font-bold inline-flex items-center gap-2">
+              <i data-lucide="send" class="w-4 h-4"></i> Envoyer à Sidoine
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SECTION 6: MÉTHODE (#methode) ============ -->
+  <section id="methode" class="relative py-20 sm:py-28 lg:py-36 overflow-hidden" style="background: #070D1F;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+
+      <div class="mb-10 sm:mb-14">
+        <p class="text-azure-light text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-4">MA MÉTHODE</p>
+        <h2 class="font-display font-900 title-clamp text-white">De l'idée au site publié</h2>
+      </div>
+
+      <!-- 6 Steps Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Step 1 -->
+        <div class="card-dark rounded-2xl p-6 sm:p-7">
+          <span class="text-azure-light text-xs font-bold tracking-[0.2em] uppercase block mb-4">ÉTAPE 1</span>
+          <div class="w-12 h-12 rounded-xl bg-azure/15 flex items-center justify-center mb-5">
+            <i data-lucide="message-circle" class="w-6 h-6 text-azure-light"></i>
+          </div>
+          <h3 class="font-display font-800 text-white text-base sm:text-lg mb-2">Cadrage &amp; Collecte Catalogue</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">Échange WhatsApp pour définir tes besoins, collecte des produits et contenus.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">WhatsApp Business</span>
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">Audit Express</span>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="card-dark rounded-2xl p-6 sm:p-7">
+          <span class="text-azure-light text-xs font-bold tracking-[0.2em] uppercase block mb-4">ÉTAPE 2</span>
+          <div class="w-12 h-12 rounded-xl bg-azure/15 flex items-center justify-center mb-5">
+            <i data-lucide="palette" class="w-6 h-6 text-azure-light"></i>
+          </div>
+          <h3 class="font-display font-800 text-white text-base sm:text-lg mb-2">Direction Artistique Sur Mesure</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">Moodboard, palette de couleurs, typographies et architecture de l'interface.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">Dribbble</span>
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">UI Design</span>
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">Typographie</span>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="card-dark rounded-2xl p-6 sm:p-7">
+          <span class="text-azure-light text-xs font-bold tracking-[0.2em] uppercase block mb-4">ÉTAPE 3</span>
+          <div class="w-12 h-12 rounded-xl bg-azure/15 flex items-center justify-center mb-5">
+            <i data-lucide="code-2" class="w-6 h-6 text-azure-light"></i>
+          </div>
+          <h3 class="font-display font-800 text-white text-base sm:text-lg mb-2">Vibe Coding &amp; Architecture</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">Code assisté par IA pour un développement ultra-rapide et sur mesure.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">Claude AI</span>
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">Gemini Pro</span>
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">Antigravity</span>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="card-dark rounded-2xl p-6 sm:p-7">
+          <span class="text-azure-light text-xs font-bold tracking-[0.2em] uppercase block mb-4">ÉTAPE 4</span>
+          <div class="w-12 h-12 rounded-xl bg-azure/15 flex items-center justify-center mb-5">
+            <i data-lucide="box" class="w-6 h-6 text-azure-light"></i>
+          </div>
+          <h3 class="font-display font-800 text-white text-base sm:text-lg mb-2">Moteur FCFA &amp; Vitrines 3D</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">Panier WhatsApp en FCFA, showrooms Three.js et fonctionnalités PWA.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">JavaScript Vanilla</span>
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">Three.js</span>
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">PWA</span>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="card-dark rounded-2xl p-6 sm:p-7">
+          <span class="text-azure-light text-xs font-bold tracking-[0.2em] uppercase block mb-4">ÉTAPE 5</span>
+          <div class="w-12 h-12 rounded-xl bg-azure/15 flex items-center justify-center mb-5">
+            <i data-lucide="smartphone" class="w-6 h-6 text-azure-light"></i>
+          </div>
+          <h3 class="font-display font-800 text-white text-base sm:text-lg mb-2">Tests Mobile &amp; Indexation Google</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">Validation responsive sur tous les appareils et optimisation du référencement.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">Responsive Mobile</span>
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">Google SEO</span>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="card-dark rounded-2xl p-6 sm:p-7">
+          <span class="text-azure-light text-xs font-bold tracking-[0.2em] uppercase block mb-4">ÉTAPE 6</span>
+          <div class="w-12 h-12 rounded-xl bg-azure/15 flex items-center justify-center mb-5">
+            <i data-lucide="rocket" class="w-6 h-6 text-azure-light"></i>
+          </div>
+          <h3 class="font-display font-800 text-white text-base sm:text-lg mb-2">Lancement &amp; Pub Motion TikTok</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">Mise en ligne GitHub Pages, spots publicitaires IA et accompagnement post-lancement.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">GitHub Pages</span>
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">Google Flow</span>
+            <span class="text-xs text-azure-light bg-azure/10 px-2.5 py-1 rounded-md font-medium">CapCut</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SECTION 7: STACK IA (#stack) ============ -->
+  <section id="stack" class="relative py-20 sm:py-28 lg:py-36 overflow-hidden" style="background: #050914;">
+    <div class="absolute inset-0 halo-blue pointer-events-none"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+
+      <div class="mb-10 sm:mb-14">
+        <p class="text-azure-light text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-4">STACK &amp; MODULES INCLUS</p>
+        <h2 class="font-display font-900 title-clamp text-white">Les technologies embarquées</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Stack Card 1: Moteur Panier WhatsApp -->
+        <div class="card-dark rounded-2xl p-6 sm:p-7 relative">
+          <div class="flex flex-wrap gap-2 absolute top-4 right-4">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full" style="background: linear-gradient(90deg, #2563EB, #38BDF8); color: white;">★ Mon préféré</span>
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">0 FCFA/mois</span>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-azure/15 flex items-center justify-center mb-5 mt-2">
+            <i data-lucide="shopping-cart" class="w-6 h-6 text-azure-light"></i>
+          </div>
+          <h3 class="font-display font-800 text-white text-base sm:text-lg mb-2">Moteur Panier WhatsApp</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Système de commande automatique en FCFA via WhatsApp. Aucune infrastructure serveur, zéro frais mensuel. Le client ajoute au panier et envoie directement sa commande.</p>
+        </div>
+
+        <!-- Stack Card 2: Google Flow -->
+        <div class="card-dark rounded-2xl p-6 sm:p-7">
+          <div class="w-12 h-12 rounded-xl bg-azure/15 flex items-center justify-center mb-5">
+            <i data-lucide="video" class="w-6 h-6 text-azure-light"></i>
+          </div>
+          <h3 class="font-display font-800 text-white text-base sm:text-lg mb-2">Google Flow (Veo &amp; Imagen)</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Génération de spots publicitaires verticaux 9:16 par IA. Visuels produits photoréalistes, animations 3D et montage motion design automatisé pour TikTok et Reels.</p>
+        </div>
+
+        <!-- Stack Card 3: Module PWA -->
+        <div class="card-dark rounded-2xl p-6 sm:p-7">
+          <div class="w-12 h-12 rounded-xl bg-azure/15 flex items-center justify-center mb-5">
+            <i data-lucide="download" class="w-6 h-6 text-azure-light"></i>
+          </div>
+          <h3 class="font-display font-800 text-white text-base sm:text-lg mb-2">Module PWA Installable</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Progressive Web App installable sur l'écran d'accueil. Fonctionne hors ligne, chargement instantané et notifications push. Expérience native sans passer par le Store.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SECTION 8: BRIEFS & PROMPTS (#briefs) ============ -->
+  <section id="briefs" class="relative py-20 sm:py-28 lg:py-36 overflow-hidden" style="background: #070D1F;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+
+      <div class="mb-10 sm:mb-14">
+        <p class="text-azure-light text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase mb-4">BIBLIOTHÈQUE</p>
+        <h2 class="font-display font-900 title-clamp text-white mb-3">Briefs &amp; Prompts rapides à copier</h2>
+        <p class="text-gray-400 text-base sm:text-lg max-w-xl">Remplace ce qui est entre crochets, colle dans ton outil, c'est parti.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Brief 1 -->
+        <div class="card-dark rounded-2xl p-5 sm:p-6">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-bold text-azure-light tracking-wider uppercase">BOUTIQUE</span>
+            <button onclick="copyBrief(this)" class="copy-btn btn-ghost px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copier
+            </button>
+          </div>
+          <h4 class="font-display font-800 text-white text-sm sm:text-base mb-3">Brief Boutique Express</h4>
+          <div class="brief-content p-4 rounded-xl text-xs leading-relaxed font-mono text-gray-400" style="background: rgba(5, 9, 20, 0.9); border: 1px solid rgba(56, 152, 255, 0.1);">Crée une boutique e-commerce one-page pour [NOM DE LA MARQUE], secteur [SECTEUR]. Panier WhatsApp automatique en FCFA. Design mobile-first, palette [COULEUR PRINCIPALE] et [COULEUR SECONDAIRE]. Catalogue de [NOMBRE] produits avec photos, prix et bouton "Ajouter au panier". Récapitulatif encodé en URL wa.me/[NUMÉRO].</div>
+        </div>
+
+        <!-- Brief 2 -->
+        <div class="card-dark rounded-2xl p-5 sm:p-6">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-bold text-azure-light tracking-wider uppercase">B2B</span>
+            <button onclick="copyBrief(this)" class="copy-btn btn-ghost px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copier
+            </button>
+          </div>
+          <h4 class="font-display font-800 text-white text-sm sm:text-base mb-3">Brief Site B2B</h4>
+          <div class="brief-content p-4 rounded-xl text-xs leading-relaxed font-mono text-gray-400" style="background: rgba(5, 9, 20, 0.9); border: 1px solid rgba(56, 152, 255, 0.1);">Crée un site vitrine professionnel pour [NOM DE L'ENTREPRISE], secteur [SECTEUR]. Simulateur de devis interactif en FCFA avec 3 formules. Formulaire de contact WhatsApp. Sections : Hero, Services, Galerie, Témoignages, Contact. PWA installable. SEO optimisé. Design corporate [COULEUR].</div>
+        </div>
+
+        <!-- Brief 3 -->
+        <div class="card-dark rounded-2xl p-5 sm:p-6">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-bold text-azure-light tracking-wider uppercase">VIDÉO</span>
+            <button onclick="copyBrief(this)" class="copy-btn btn-ghost px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copier
+            </button>
+          </div>
+          <h4 class="font-display font-800 text-white text-sm sm:text-base mb-3">Prompt Google Flow Smartphone 3D</h4>
+          <div class="brief-content p-4 rounded-xl text-xs leading-relaxed font-mono text-gray-400" style="background: rgba(5, 9, 20, 0.9); border: 1px solid rgba(56, 152, 255, 0.1);">A hyper-realistic 3D smartphone floating in dark space, screen glowing with [PRODUCT/BRAND] interface. Cinematic lighting, volumetric fog, blue and cyan neon reflections. Camera slowly orbits the device. 9:16 vertical, 4K quality, 5 seconds loop. Style: Apple keynote product reveal.</div>
+        </div>
+
+        <!-- Brief 4 -->
+        <div class="card-dark rounded-2xl p-5 sm:p-6">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-bold text-azure-light tracking-wider uppercase">VIDÉO</span>
+            <button onclick="copyBrief(this)" class="copy-btn btn-ghost px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copier
+            </button>
+          </div>
+          <h4 class="font-display font-800 text-white text-sm sm:text-base mb-3">Prompt Google Flow Hook Notifications</h4>
+          <div class="brief-content p-4 rounded-xl text-xs leading-relaxed font-mono text-gray-400" style="background: rgba(5, 9, 20, 0.9); border: 1px solid rgba(56, 152, 255, 0.1);">Extreme close-up of a smartphone screen receiving WhatsApp order notifications. Each notification pops with a satisfying sound effect animation. Green badges with order amounts in FCFA. Fast-paced, 9:16 vertical, 3 seconds. Style: viral TikTok money notification trend.</div>
+        </div>
+
+        <!-- Brief 5 -->
+        <div class="card-dark rounded-2xl p-5 sm:p-6">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-bold text-azure-light tracking-wider uppercase">OPTION</span>
+            <button onclick="copyBrief(this)" class="copy-btn btn-ghost px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copier
+            </button>
+          </div>
+          <h4 class="font-display font-800 text-white text-sm sm:text-base mb-3">Option PWA &amp; 360°</h4>
+          <div class="brief-content p-4 rounded-xl text-xs leading-relaxed font-mono text-gray-400" style="background: rgba(5, 9, 20, 0.9); border: 1px solid rgba(56, 152, 255, 0.1);">Ajoute à ce site : 1) Un Service Worker pour le mode offline et l'installation PWA avec manifest.json. 2) Un viewer 3D Three.js OrbitControls pour afficher un modèle [FORMAT : .glb/.gltf] du produit [NOM DU PRODUIT] en rotation 360°. Le fond du viewer est transparent, intégré dans la section Hero.</div>
+        </div>
+
+        <!-- Brief 6 -->
+        <div class="card-dark rounded-2xl p-5 sm:p-6">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-bold text-azure-light tracking-wider uppercase">SCRIPT</span>
+            <button onclick="copyBrief(this)" class="copy-btn btn-ghost px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copier
+            </button>
+          </div>
+          <h4 class="font-display font-800 text-white text-sm sm:text-base mb-3">Structure Script TikTok 15s</h4>
+          <div class="brief-content p-4 rounded-xl text-xs leading-relaxed font-mono text-gray-400" style="background: rgba(5, 9, 20, 0.9); border: 1px solid rgba(56, 152, 255, 0.1);">HOOK (0-3s) : Question choc ou stat surprenante sur [SUJET]. TENSION (3-8s) : Le problème que rencontrent les [CIBLE] au quotidien avec [POINT DE DOULEUR]. SOLUTION (8-12s) : Présentation de [PRODUIT/SERVICE] avec bénéfice principal. CTA (12-15s) : "Lien en bio" ou "Envoie [MOT-CLÉ] en DM". Ton : direct, énergique, conversationnel.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ FOOTER (#contact) ============ -->
+  <footer id="contact" class="border-t border-white/10 relative z-20" style="background: #050914;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16 sm:py-20">
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16 mb-12">
+
+        <!-- Col 1: Brand & Contact -->
+        <div>
+          <div class="flex items-center gap-2.5 mb-5">
+            <span class="btn-azure w-10 h-10 flex items-center justify-center rounded-xl text-sm font-black tracking-tight shadow-md">RS</span>
+            <span class="font-display font-800 text-lg text-white">RODIS STUDIO<sup class="text-[10px] align-super text-azure-light">®</sup></span>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mb-5">
+            Agence digitale &amp; Vibe Coding à Lomé, Togo. Boutiques Express WhatsApp, sites B2B, PWA et vitrines 3D. 0 FCFA d'abonnement mensuel.
+          </p>
+          <a href="https://wa.me/22893095094" target="_blank" class="text-[#38BDF8] text-base font-bold hover:underline underline-offset-4 inline-flex items-center gap-2">
+            <i data-lucide="phone" class="w-4 h-4"></i> +228 93 09 50 94
+          </a>
+        </div>
+
+        <!-- Col 2: Démos -->
+        <div>
+          <h4 class="font-display font-800 text-white text-sm mb-5 tracking-wider uppercase">Démos en production</h4>
+          <ul class="flex flex-col gap-3">
+            <li><a href="https://rodis-studio.github.io/fitted-by-buzz/" target="_blank" class="text-gray-400 text-sm hover:text-azure-light transition-colors">Fitted By Buzz® — Showroom</a></li>
+            <li><a href="https://rodis-studio.github.io/mr-propre/" target="_blank" class="text-gray-400 text-sm hover:text-azure-light transition-colors">Mr Propre Lomé — B2B &amp; Devis</a></li>
+            <li><a href="https://rodis-studio.github.io/glam/" target="_blank" class="text-gray-400 text-sm hover:text-azure-light transition-colors">Emma Beauty (Glam) — Cosmétiques</a></li>
+            <li><a href="#demos" class="text-gray-400 text-sm hover:text-azure-light transition-colors">Voir toutes les démos →</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Navigation -->
+        <div>
+          <h4 class="font-display font-800 text-white text-sm mb-5 tracking-wider uppercase">Navigation</h4>
+          <ul class="flex flex-col gap-3">
+            <li><a href="#offres" class="text-gray-400 text-sm hover:text-azure-light transition-colors">Offres Express</a></li>
+            <li><a href="#a-propos" class="text-gray-400 text-sm hover:text-azure-light transition-colors">À propos</a></li>
+            <li><a href="#simulateur" class="text-gray-400 text-sm hover:text-azure-light transition-colors">Outils &amp; Devis</a></li>
+            <li><a href="#methode" class="text-gray-400 text-sm hover:text-azure-light transition-colors">Méthode</a></li>
+            <li><a href="#briefs" class="text-gray-400 text-sm hover:text-azure-light transition-colors">Briefs &amp; Prompts</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Social Cards Grid (jeremietefa style) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 pt-6 pb-10 border-t border-white/5">
+        <a href="https://wa.me/22893095094" target="_blank" class="social-card p-3 rounded-xl flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+          </div>
+          <div class="min-w-0">
+            <p class="text-xs font-bold text-white truncate">WhatsApp</p>
+            <p class="text-[11px] text-gray-400 truncate">+228 93 09 50 94</p>
+          </div>
         </a>
-        <span class="text-white/40 text-sm">© 2024 RODIS STUDIO®</span>
+
+        <a href="https://github.com/rodis-studio" target="_blank" class="social-card p-3 rounded-xl flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-gray-500/20 text-gray-300 flex items-center justify-center shrink-0">
+            <i data-lucide="github" class="w-4 h-4"></i>
+          </div>
+          <div class="min-w-0">
+            <p class="text-xs font-bold text-white truncate">GitHub</p>
+            <p class="text-[11px] text-gray-400 truncate">@rodis-studio</p>
+          </div>
+        </a>
+
+        <a href="https://rodis-studio.github.io/" target="_blank" class="social-card p-3 rounded-xl flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-azure/20 text-azure-light flex items-center justify-center shrink-0">
+            <i data-lucide="globe" class="w-4 h-4"></i>
+          </div>
+          <div class="min-w-0">
+            <p class="text-xs font-bold text-white truncate">Site Web</p>
+            <p class="text-[11px] text-gray-400 truncate">rodis-studio.github.io</p>
+          </div>
+        </a>
+
+        <a href="https://wa.me/22893095094?text=Bonjour%20Sidoine%20%F0%9F%91%8B%20Je%20veux%20rejoindre%20la%20communaut%C3%A9" target="_blank" class="social-card p-3 rounded-xl flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+            <i data-lucide="users" class="w-4 h-4"></i>
+          </div>
+          <div class="min-w-0">
+            <p class="text-xs font-bold text-white truncate">Communauté</p>
+            <p class="text-[11px] text-gray-400 truncate">VIP Vibe Coders</p>
+          </div>
+        </a>
+
+        <a href="mailto:contact@rodis-studio.com" class="social-card p-3 rounded-xl flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+          </div>
+          <div class="min-w-0">
+            <p class="text-xs font-bold text-white truncate">Email Pro</p>
+            <p class="text-[11px] text-gray-400 truncate">contact@rodis</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Bottom bar & Signature -->
+      <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <p class="text-gray-400 text-sm font-medium">Conçu par RODIS STUDIO® — Lomé, Togo (+228 93 09 50 94)</p>
+        <p class="text-gray-500 text-xs">© 2026 RODIS STUDIO® • Fondé par Sidoine BEDI</p>
       </div>
     </div>
   </footer>
 
-  <!-- ============ SCRIPTS ============ -->
+  <!-- ============ FLOATING SCROLL-TO-TOP BUTTON ============ -->
+  <button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="scroll-top-btn btn-azure w-12 h-12 rounded-full flex items-center justify-center shadow-lg" aria-label="Retour en haut">
+    <i data-lucide="arrow-up" class="w-5 h-5 text-white"></i>
+  </button>
+
+  <!-- ============ ALL JAVASCRIPT ============ -->
   <script>
-    // ── Mobile menu ──
+    // ── Initialize Lucide Icons ──
+    lucide.createIcons();
+
+    // ── Scroll Progress Bar ──
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      scrollProgress.style.width = progress + '%';
+    }, { passive: true });
+
+    // ── Scroll-to-top button visibility ──
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 600) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    // ── Mobile Menu ──
     const burger = document.getElementById('burger');
     const mobileMenu = document.getElementById('mobileMenu');
     let menuOpen = false;
@@ -593,217 +1212,284 @@
       document.body.style.overflow = '';
     }
 
-    // ── WhatsApp form ──
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('clientName').value.trim();
-      const service = document.getElementById('serviceType').value;
-      const sector = document.getElementById('sector').value;
+    // ── Hero Search Bar ──
+    function handleHeroSearch() {
+      const query = document.getElementById('heroSearch').value.trim().toLowerCase();
+      if (!query) {
+        document.getElementById('demos').scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
 
-      if (!name || !service || !sector) return;
+      // Map keywords to categories
+      const filterMap = {
+        'streetwear': '3d', 'luxe': '3d', '3d': '3d', 'three': '3d', '360': '3d',
+        'cosmétique': 'ecommerce', 'beauté': 'ecommerce', 'beauty': 'ecommerce', 'boutique': 'ecommerce', 'whatsapp': 'ecommerce', 'ecommerce': 'ecommerce', 'e-commerce': 'ecommerce',
+        'b2b': 'b2b', 'devis': 'b2b', 'pwa': 'b2b', 'vitrine': 'b2b', 'nettoyage': 'b2b', 'import': 'b2b', 'négoce': 'b2b',
+        'motion': 'motion', 'tiktok': 'motion', 'vidéo': 'motion', 'video': 'motion', 'spot': 'motion', 'pub': 'motion', 'google flow': 'motion'
+      };
 
-      const msg = `Bonjour RODIS STUDIO 👋\n\nJe suis *${name}*.\nSecteur : ${sector}\nService souhaité : ${service}\n\nMerci de me recontacter !`;
-      const url = `https://wa.me/22893095094?text=${encodeURIComponent(msg)}`;
-      window.open(url, '_blank');
-    });
+      let matchedFilter = 'all';
+      for (const [keyword, filter] of Object.entries(filterMap)) {
+        if (query.includes(keyword)) {
+          matchedFilter = filter;
+          break;
+        }
+      }
 
-    // ── GSAP Animations ──
-    gsap.registerPlugin(ScrollTrigger);
+      // Filter demos
+      filterDemos(matchedFilter);
 
-    // Fade-in on scroll
-    document.querySelectorAll('#about, #projects, #services, #contact').forEach(section => {
-      gsap.from(section.querySelectorAll('h2, p, .project-card, .service-col, form'), {
-        y: 35,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 85%',
-          once: true
+      // Update filter UI pills
+      document.querySelectorAll('#demoFilters button').forEach(btn => {
+        if (btn.getAttribute('data-filter') === matchedFilter) {
+          btn.classList.add('active');
+          btn.classList.remove('filter-pill');
+        } else {
+          btn.classList.remove('active');
+          btn.classList.add('filter-pill');
         }
       });
+
+      // Scroll to demos section
+      document.getElementById('demos').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Search on enter key
+    document.getElementById('heroSearch').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleHeroSearch();
     });
 
-    // Hero portrait animation
-    gsap.from('.hero-portrait-img', {
-      scale: 0.92,
-      opacity: 0,
-      duration: 1.4,
-      ease: 'power3.out',
-      delay: 0.1
-    });
-
-    // Hero title scale
-    gsap.from('#hero h1, #hero .block.md\\:hidden', {
-      scale: 0.94,
-      duration: 1.1,
-      ease: 'power4.out',
-      delay: 0.3
-    });
-
-    // Hero left content
-    gsap.from('#hero p, #hero a', {
-      y: 25,
-      duration: 0.8,
-      stagger: 0.12,
-      ease: 'power3.out',
-      delay: 0.5
-    });
-
-    // Diamond float
-    gsap.to('.diamond', {
-      y: -18,
-      rotation: 48,
-      duration: 5,
-      ease: 'sine.inOut',
-      yoyo: true,
-      repeat: -1
-    });
-
-    // Nav background on scroll
-    const nav = document.querySelector('nav');
-    ScrollTrigger.create({
-      start: 'top -80',
-      onUpdate: self => {
-        nav.style.borderBottomColor = self.progress > 0 ? 'rgba(57, 229, 27, 0.25)' : 'rgba(255,255,255,0.1)';
-      }
-    });
-
-    // ── Animation 3D Three.js (Constellation Émeraude Hero) ──
-    (function initHero3D() {
-      const canvas = document.getElementById('hero-canvas');
-      const heroSection = document.getElementById('hero');
-      if (!canvas || !heroSection || typeof THREE === 'undefined') return;
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(60, heroSection.clientWidth / heroSection.clientHeight, 1, 1000);
-      camera.position.z = 400;
-
-      const renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-        alpha: true,
-        antialias: true,
-        powerPreference: 'high-performance'
-      });
-      renderer.setSize(heroSection.clientWidth, heroSection.clientHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-      // Texture circulaire douce pour particules lumineuses
-      function createParticleTexture() {
-        const c = document.createElement('canvas');
-        c.width = 64;
-        c.height = 64;
-        const ctx = c.getContext('2d');
-        const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-        grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-        grad.addColorStop(0.35, 'rgba(255, 255, 255, 0.85)');
-        grad.addColorStop(0.7, 'rgba(255, 255, 255, 0.25)');
-        grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(32, 32, 32, 0, Math.PI * 2);
-        ctx.fill();
-        return new THREE.CanvasTexture(c);
-      }
-
-      // Nombre de particules : 60 sur mobile (< 768px), 120 sur PC
-      const isMobile = window.innerWidth < 768;
-      const particleCount = isMobile ? 60 : 120;
-
-      const geometry = new THREE.BufferGeometry();
-      const positions = new Float32Array(particleCount * 3);
-      const colors = new Float32Array(particleCount * 3);
-      const speeds = new Float32Array(particleCount);
-
-      const colorLime = new THREE.Color(0x39E51B);
-      const colorWhite = new THREE.Color(0xFFFFFF);
-
-      for (let i = 0; i < particleCount; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * 850;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 650;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 500;
-
-        // Répartition : 75% Vert Lime, 25% Blanc
-        const isLime = Math.random() < 0.75;
-        const c = isLime ? colorLime : colorWhite;
-        colors[i * 3] = c.r;
-        colors[i * 3 + 1] = c.g;
-        colors[i * 3 + 2] = c.b;
-
-        speeds[i] = 0.3 + Math.random() * 0.5;
-      }
-
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-      const material = new THREE.PointsMaterial({
-        size: isMobile ? 6 : 8,
-        map: createParticleTexture(),
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.9,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false
-      });
-
-      const particles = new THREE.Points(geometry, material);
-      scene.add(particles);
-
-      // Interactions légères (souris PC + scroll mobile)
-      let mouseX = 0, mouseY = 0;
-      let targetMouseX = 0, targetMouseY = 0;
-      let isVisible = true;
-
-      window.addEventListener('mousemove', (e) => {
-        targetMouseX = (e.clientX - window.innerWidth / 2) * 0.0003;
-        targetMouseY = (e.clientY - window.innerHeight / 2) * 0.0003;
-      }, { passive: true });
-
-      window.addEventListener('scroll', () => {
-        isVisible = window.scrollY < heroSection.offsetHeight + 100;
-      }, { passive: true });
-
-      // Redimensionnement fluide
-      window.addEventListener('resize', () => {
-        const width = heroSection.clientWidth;
-        const height = heroSection.clientHeight;
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
-        renderer.setSize(width, height);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      });
-
-      // Boucle de rendu 60 FPS
-      let prevTime = performance.now();
-      function animate(now) {
-        requestAnimationFrame(animate);
-        if (!isVisible) return;
-
-        const delta = (now - prevTime) * 0.001;
-        prevTime = now;
-
-        mouseX += (targetMouseX - mouseX) * 0.05;
-        mouseY += (targetMouseY - mouseY) * 0.05;
-
-        const scrollInfluence = window.scrollY * 0.0004;
-
-        // Rotation continue douce + réaction souris et scroll
-        particles.rotation.y += 0.0008 + mouseX * 0.04;
-        particles.rotation.x += 0.0005 + mouseY * 0.04 + scrollInfluence * 0.008;
-
-        // Flottement organique subtil
-        const posArray = geometry.attributes.position.array;
-        const time = now * 0.0012;
-        for (let i = 0; i < particleCount; i++) {
-          posArray[i * 3 + 1] += Math.sin(time + i * 0.5) * (speeds[i] * 0.2);
+    // ── Demo Filters ──
+    function filterDemos(filter) {
+      const cards = document.querySelectorAll('.demo-card');
+      cards.forEach(card => {
+        const categories = card.getAttribute('data-categories') || '';
+        if (filter === 'all' || categories.includes(filter)) {
+          card.style.display = '';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(15px)';
+          requestAnimationFrame(() => {
+            card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          });
+        } else {
+          card.style.display = 'none';
         }
-        geometry.attributes.position.needsUpdate = true;
+      });
+    }
 
-        renderer.render(scene, camera);
+    document.querySelectorAll('#demoFilters button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#demoFilters button').forEach(b => {
+          b.classList.remove('active');
+          b.classList.add('filter-pill');
+        });
+        btn.classList.add('active');
+        btn.classList.remove('filter-pill');
+
+        filterDemos(btn.getAttribute('data-filter'));
+      });
+    });
+
+    // ── Tool Tabs (Devis / WhatsApp / Comparateur) ──
+    document.querySelectorAll('.tool-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tool-tab').forEach(t => {
+          t.classList.remove('tab-active');
+          t.classList.add('filter-pill');
+        });
+        tab.classList.add('tab-active');
+        tab.classList.remove('filter-pill');
+
+        document.querySelectorAll('.tool-panel').forEach(p => p.classList.add('hidden'));
+        const target = document.getElementById('panel-' + tab.getAttribute('data-tab'));
+        if (target) target.classList.remove('hidden');
+
+        document.getElementById('toolResult').textContent = 'Remplis le formulaire à gauche et clique sur le bouton pour voir le résultat ici.';
+      });
+    });
+
+    // ── Simulateur de Devis ──
+    function calculateDevis() {
+      const brand = document.getElementById('devisBrand').value.trim() || 'Ma Marque';
+      const typeSelect = document.getElementById('devisType');
+      const basePrice = parseInt(typeSelect.value) || 75000;
+      const typeName = typeSelect.options[typeSelect.selectedIndex].text;
+
+      let total = basePrice;
+      let options = [];
+
+      if (document.getElementById('optionPWA').checked) {
+        total += 15000;
+        options.push('Installation PWA (+15 000 FCFA)');
       }
-      requestAnimationFrame(animate);
-    })();
+      if (document.getElementById('optionSpot').checked) {
+        total += 20000;
+        options.push('Spot Pub TikTok 9:16 IA (+20 000 FCFA)');
+      }
+
+      const result = `══════════════════════════════════
+  DEVIS ESTIMATIF — ${brand}
+══════════════════════════════════
+
+📦 Projet : ${typeName}
+💰 Base : ${basePrice.toLocaleString('fr-FR')} FCFA
+
+${options.length > 0 ? '➕ Options retenues :\n' + options.map(o => '   • ' + o).join('\n') + '\n\n' : ''}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💎 TOTAL ESTIMÉ : ${total.toLocaleString('fr-FR')} FCFA
+   Abonnement mensuel : 0 FCFA
+   Délai de livraison : 24 à 48h
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Devis généré via rodis-studio.github.io
+📞 Pour lancer la production, contacte
+   Sidoine BEDI (+228 93 09 50 94)`;
+
+      document.getElementById('toolResult').textContent = result;
+      updateSendLink(result);
+    }
+
+    // ── Générateur wa.me ──
+    function generateWaLink() {
+      const number = document.getElementById('waNumber').value.trim();
+      const message = document.getElementById('waMessage').value.trim();
+
+      if (!number) {
+        document.getElementById('toolResult').textContent = '⚠️ Erreur : Veuillez entrer un numéro de téléphone avec indicatif (ex: 22893095094).';
+        return;
+      }
+
+      const cleanNumber = number.replace(/[\s\-\+\(\)]/g, '');
+      let url = `https://wa.me/${cleanNumber}`;
+      if (message) {
+        url += `?text=${encodeURIComponent(message)}`;
+      }
+
+      const result = `══════════════════════════════════
+  LIEN WHATSAPP OPTIMISÉ GÉNÉRÉ
+══════════════════════════════════
+
+📱 Destinataire : +${cleanNumber}
+💬 Message encodé : ${message || '(Aucun message initial)'}
+
+🔗 Ton URL WhatsApp wa.me :
+${url}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Copie ce lien et intègre-le sur tes
+pages, boutons d'achat ou bio Instagram/TikTok !`;
+
+      document.getElementById('toolResult').textContent = result;
+      updateSendLink(result);
+    }
+
+    // ── Comparateur Zéro Abonnement ──
+    function calculateSavings() {
+      const monthly = parseInt(document.getElementById('compMonthly').value) || 0;
+      const setup = parseInt(document.getElementById('compSetup').value) || 0;
+      const rodis = parseInt(document.getElementById('compRodis').value) || 75000;
+
+      const cost1Year = setup + (monthly * 12);
+      const cost2Years = setup + (monthly * 24);
+      const savings1Year = cost1Year - rodis;
+      const savings2Years = cost2Years - rodis;
+
+      const result = `══════════════════════════════════
+  BILAN COMPARATIF D'ÉCONOMIES
+══════════════════════════════════
+
+🏢 Solution concurrente classique :
+   Frais d'installation : ${setup.toLocaleString('fr-FR')} FCFA
+   Abonnement mensuel : ${monthly.toLocaleString('fr-FR')} FCFA/mois
+
+   Coût total Année 1 : ${cost1Year.toLocaleString('fr-FR')} FCFA
+   Coût total 2 Ans : ${cost2Years.toLocaleString('fr-FR')} FCFA
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💎 Modèle RODIS STUDIO® :
+   Investissement unique : ${rodis.toLocaleString('fr-FR')} FCFA
+   Abonnement mensuel : 0 FCFA/mois à vie
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 ÉCONOMIES EN POCHE :
+   Gain sur 1 an : ${savings1Year.toLocaleString('fr-FR')} FCFA
+   Gain sur 2 ans : ${savings2Years.toLocaleString('fr-FR')} FCFA
+
+✅ 100% autonome, zéro prélèvement récurrent.`;
+
+      document.getElementById('toolResult').textContent = result;
+      updateSendLink(result);
+    }
+
+    // ── Mise à jour lien d'envoi WhatsApp ──
+    function updateSendLink(text) {
+      const sendBtn = document.getElementById('sendToSidoine');
+      const encoded = encodeURIComponent(text);
+      sendBtn.href = `https://wa.me/22893095094?text=${encoded}`;
+    }
+
+    // ── Copie du Résultat ──
+    function copyResult() {
+      const text = document.getElementById('toolResult').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyResultBtn');
+        btn.classList.add('copied');
+        btn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> Copié ✓';
+        lucide.createIcons();
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<i data-lucide="copy" class="w-4 h-4"></i> Copier le texte';
+          lucide.createIcons();
+        }, 2000);
+      });
+    }
+
+    // ── Copie d'un Brief ──
+    function copyBrief(btn) {
+      const card = btn.closest('.card-dark');
+      const content = card.querySelector('.brief-content').textContent;
+      navigator.clipboard.writeText(content).then(() => {
+        btn.classList.add('copied');
+        btn.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5"></i> Copié ✓';
+        lucide.createIcons();
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<i data-lucide="copy" class="w-3.5 h-3.5"></i> Copier';
+          lucide.createIcons();
+        }, 2000);
+      });
+    }
+
+    // ── Observer pour animations fluides au scroll ──
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('section').forEach(section => {
+      const elements = section.querySelectorAll('h2, .card-dark, .glass-card');
+      elements.forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(25px)';
+        el.style.transition = `opacity 0.6s ease ${i * 0.04}s, transform 0.6s ease ${i * 0.04}s`;
+        fadeObserver.observe(el);
+      });
+    });
+
+    // Éléments du Hero visibles immédiatement
+    document.querySelectorAll('#accueil h1, #accueil p, #accueil span, #accueil .grid, #accueil input, #accueil button, #accueil .arch-container, #accueil .glass-card').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    });
   </script>
 
 </body>
