@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EdouarGroup Trade – Vos articles importés jusqu’au Togo</title>
+  <meta name="description" content="Importation sur mesure vers le Togo depuis la Chine, le Nigéria et la Turquie. Faites votre demande d'article avec EdouarGroup Trade.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+  <!-- En-tête -->
+  <header class="haut">
+    <div class="wrap">
+      <span class="marque" onclick="nouvelleDemande()">
+        EdouarGroup Trade
+      </span>
+      <a class="btn-wa" href="https://wa.me/22891037336" target="_blank" rel="noopener">
+        <span>💬 WhatsApp</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- VUE 1 : FORMULAIRE PRINCIPAL -->
+    <div id="vue-formulaire">
+      <!-- Section Hero -->
+      <section class="hero">
+        <div class="wrap grille">
+
+          <div>
+            <h1>Vos articles importés jusqu’au Togo</h1>
+            <p class="intro">
+              Dites-nous ce que vous cherchez. Nous importons depuis la Chine,
+              le Nigéria et la Turquie avec suivi complet jusqu'à Lomé.
+            </p>
+            <div class="badges-pays">
+              <span class="badge-pays">🇨🇳 Chine</span>
+              <span class="badge-pays">🇳🇬 Nigéria</span>
+              <span class="badge-pays">🇹🇷 Turquie</span>
+              <span class="badge-pays">🇹🇬 Livraison Lomé & Togo</span>
+            </div>
+          </div>
+
+          <!-- Carte Formulaire -->
+          <div class="carte">
+            <h2>Faire une demande</h2>
+
+            <div class="delai-boite">
+              <div class="delai" role="img" aria-label="7 jours">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <p>
+                Des frais de <strong>1 000 francs</strong> sont demandés pour envoyer la demande.
+                Si vous commandez dans les <strong>7 jours</strong> qui suivent le paiement,
+                ils vous sont <strong>remboursés en totalité</strong>.
+              </p>
+            </div>
+
+            <form id="form-demande" novalidate>
+              <label for="telephone">Votre numéro de téléphone</label>
+              <input id="telephone" type="tel" name="telephone" placeholder="Ex: 90 12 34 56 ou 70 12 34 56" required>
+              <div id="erreur-telephone" class="erreur"></div>
+
+              <label for="message">L’article que vous voulez</label>
+              <textarea id="message" name="message" placeholder="Décrivez précisément l'article, la marque, les caractéristiques ou la quantité..." required></textarea>
+
+              <label for="photo">Photo de l’article <span class="facultatif">(facultatif)</span></label>
+              <input id="photo" type="file" name="photo" accept="image/*">
+              <div id="photo-preview-wrap" class="photo-preview-wrap">
+                <img id="photo-preview-thumb" class="photo-thumb" src="" alt="Aperçu">
+                <span id="photo-preview-name" class="photo-info"></span>
+                <button type="button" id="btn-suppr-photo" class="photo-remove">✕ Supprimer</button>
+              </div>
+
+              <label for="email">Adresse email <span class="facultatif">(facultatif)</span></label>
+              <input id="email" type="email" name="email" placeholder="votre.email@exemple.com">
+
+              <label for="reseau">Payer avec</label>
+              <select id="reseau" name="reseau" required>
+                <option value="TMONEY" selected>T-Money (Togocom)</option>
+                <option value="FLOOZ">Flooz (Moov)</option>
+              </select>
+
+              <button id="btn-submit" class="btn-principal" type="submit">
+                <span>Envoyer et payer 1 000 francs</span>
+                <span>→</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Section Étapes -->
+      <section class="etapes-section">
+        <div class="wrap">
+          <h2>Comment ça marche</h2>
+          <ol class="etapes">
+            <li>
+              <strong>1. Décrivez l’article</strong>
+              <p>Votre numéro, votre description détaillée et une photo si vous en avez une.</p>
+            </li>
+            <li>
+              <strong>2. Payez 1 000 francs</strong>
+              <p>Par T-Money ou Flooz. Le délai de 7 jours commence à ce moment-là.</p>
+            </li>
+            <li>
+              <strong>3. Commandez dans les 7 jours</strong>
+              <p>Notre équipe recherche les meilleurs prix usine, puis vous passez votre commande.</p>
+            </li>
+            <li>
+              <strong>4. Récupérez vos 1 000 francs</strong>
+              <p>Ils vous sont déduits ou rendus en totalité. Sans commande sous 7 jours, ils ne sont pas remboursés.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Bandeau Contact WhatsApp -->
+      <section class="bandeau">
+        <div class="wrap">
+          <h2>Une question avant de commencer ?</h2>
+          <p>Écrivez-nous sur WhatsApp, nous vous répondons directement pour toute précision sur vos importations.</p>
+          <a class="btn-wa clair" href="https://wa.me/22891037336" target="_blank" rel="noopener">+228 91 03 73 36</a>
+          <a class="btn-wa clair" href="https://wa.me/22897755964" target="_blank" rel="noopener">+228 97 75 59 64</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- VUE 2 : CONFIRMATION & STATUT (MERCI) -->
+    <div id="vue-merci" style="display: none;">
+      <section class="wrap merci">
+        <div style="margin-bottom: 24px;">
+          <button class="btn-wa" onclick="nouvelleDemande()">← Retour au formulaire</button>
+        </div>
+
+        <h1>Demande prise en compte</h1>
+        
+        <p id="merci-msg-statut">
+          Votre demande est enregistrée avec succès.
+        </p>
+
+        <div style="margin: 16px 0;">
+          <span style="font-size: 14px; text-transform: uppercase; font-weight: 700; display: block; opacity: 0.8;">Référence de votre demande :</span>
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 6px;">
+            <span id="merci-ref" class="reference">EGT-000000</span>
+            <button class="btn-copy" onclick="copierReference()">Copier</button>
+          </div>
+        </div>
+
+        <div style="margin-top: 14px;">
+          <span id="statut-paiement-badge" class="statut-badge attente">Paiement en attente</span>
+        </div>
+
+        <!-- Récapitulatif -->
+        <div class="box-recap">
+          <div class="ligne">
+            <span>Téléphone :</span>
+            <strong id="recap-tel">-</strong>
+          </div>
+          <div class="ligne">
+            <span>Opérateur sélectionné :</span>
+            <strong id="recap-reseau">-</strong>
+          </div>
+          <div class="ligne">
+            <span>Frais d'engagement :</span>
+            <strong>1 000 FCFA</strong>
+          </div>
+          <div class="ligne" style="border-top: 1px dashed var(--brume); padding-top: 8px; margin-top: 8px;">
+            <span>Garantie remboursement :</span>
+            <strong style="color: var(--orange);">7 jours dès validation</strong>
+          </div>
+          <div style="margin-top: 10px; font-size: 14px;">
+            <span style="font-weight: 700;">Article demandé :</span>
+            <p id="recap-article" style="font-size: 14px; margin: 4px 0 0; background: var(--ciel); padding: 8px; border-radius: 4px;"></p>
+          </div>
+        </div>
+
+        <!-- Bloc instructions directes si USSD non validé ou secours -->
+        <div id="bloc-instructions-paiement" class="instructions-paiement">
+          <h3>📌 Instructions pour valider votre demande</h3>
+          <p style="margin: 0 0 8px; font-size: 14px;">
+            Si vous n'avez pas reçu l'invite automatique sur votre téléphone, vous pouvez effectuer le transfert de <strong>1 000 FCFA</strong> directement au numéro officiel :
+          </p>
+          <ol>
+            <li>Ouvrez votre menu <strong id="instruction-operateur">T-Money ou Flooz</strong>.</li>
+            <li>Transférez 1 000 F au numéro : <strong id="instruction-numero" style="font-size: 17px; color: var(--marine);">+228 91 03 73 36</strong>.</li>
+            <li>Cliquez ensuite ci-dessous pour confirmer votre référence sur WhatsApp :</li>
+          </ol>
+        </div>
+
+        <!-- Bouton confirmation WhatsApp -->
+        <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px;">
+          <a id="btn-wa-confirmation" class="btn-principal" href="#" target="_blank" rel="noopener" style="background: var(--vert); text-decoration: none;">
+            <span>💬 Confirmer sur WhatsApp (+228 91 03 73 36)</span>
+          </a>
+          <a id="btn-wa-2" class="btn-wa" href="#" target="_blank" rel="noopener" style="text-align: center;">
+            <span>Écrire sur le 2ème numéro (+228 97 75 59 64)</span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Toast de notification -->
+  <div id="toast" class="hidden"></div>
+
+  <!-- Modal Admin / Gérant -->
+  <div id="modal-gerant" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 style="font-size: 18px;">📋 Espace Gérant — Demandes reçues</h3>
+        <button class="btn-fermer" onclick="fermerEspaceGerant()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 14px; margin-top: 0;">Historique des demandes clients enregistrées sur ce navigateur :</p>
+        <div style="overflow-x: auto;">
+          <table class="table-demandes">
+            <thead>
+              <tr>
+                <th>Réf</th>
+                <th>Date</th>
+                <th>Téléphone</th>
+                <th>Article</th>
+                <th>Réseau</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="table-demandes-corps"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pied de page -->
+  <footer class="bas">
+    <div class="wrap">
+      <span>EdouarGroup Trade — Importation vers le Togo</span>
+      <span>
+        WhatsApp :
+        <a href="https://wa.me/22891037336" target="_blank" rel="noopener">+228 91 03 73 36</a>
+        /
+        <a href="https://wa.me/22897755964" target="_blank" rel="noopener">+228 97 75 59 64</a>
+      </span>
+      <button class="btn-gerant-mini" onclick="ouvrirEspaceGerant()">Espace Gérant</button>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
