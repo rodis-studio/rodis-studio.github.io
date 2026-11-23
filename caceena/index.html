@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CACEENA-GROUP — Cockpit de Pilotage d'Élevage</title>
+    <meta name="description" content="Tableau de bord B2B de pilotage zootechnique pour CACEENA-GROUP. Suivi des cycles de volailles, mortalité, dépenses et interventions sanitaires.">
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'caceena-black': '#050B07',
+                        'caceena-card': '#0A1910',
+                        'caceena-green': '#22C55E',
+                        'caceena-lime': '#39E51B',
+                        'caceena-border': '#16291E',
+                        'caceena-muted': '#0D1F14',
+                    },
+                    fontFamily: {
+                        'jakarta': ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* ── Base ───────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html {
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background-color: #050B07;
+            color: #f5f5f5;
+        }
+
+        body {
+            overflow-x: hidden;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ── Fluid Typography ──────────────────────────── */
+        .fluid-title {
+            font-size: clamp(1.25rem, 2.5vw + 0.5rem, 2rem);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .fluid-subtitle {
+            font-size: clamp(0.875rem, 1.5vw + 0.25rem, 1.125rem);
+            overflow-wrap: anywhere;
+        }
+
+        .fluid-kpi {
+            font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        /* ── Scrollbar ─────────────────────────────────── */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #050B07; }
+        ::-webkit-scrollbar-thumb { background: #16291E; border-radius: 100px; }
+        ::-webkit-scrollbar-thumb:hover { background: #22C55E; }
+
+        /* ── Custom Utilities ──────────────────────────── */
+        .card-glass {
+            background-color: #0A1910;
+            border: 1px solid #16291E;
+            border-radius: 1rem;
+        }
+
+        .glow-green {
+            box-shadow: 0 0 24px rgba(34, 197, 94, 0.08);
+        }
+
+        .badge-urgent {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+        }
+
+        .badge-warning {
+            background-color: rgba(234, 179, 8, 0.15);
+            color: #facc15;
+            border: 1px solid rgba(234, 179, 8, 0.25);
+        }
+
+        .badge-ok {
+            background-color: rgba(34, 197, 94, 0.15);
+            color: #22C55E;
+            border: 1px solid rgba(34, 197, 94, 0.25);
+        }
+
+        .badge-closed {
+            background-color: rgba(100, 116, 139, 0.15);
+            color: #94a3b8;
+            border: 1px solid rgba(100, 116, 139, 0.25);
+        }
+
+        .table-row-hover:hover {
+            background-color: rgba(34, 197, 94, 0.04);
+        }
+
+        /* ── Modal Overlay ─────────────────────────────── */
+        .modal-overlay {
+            background-color: rgba(5, 11, 7, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* ── Animated Pulse Dot ────────────────────────── */
+        .pulse-dot {
+            animation: pulse-ring 2s ease-in-out infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.4); }
+        }
+
+        /* ── Transition ────────────────────────────────── */
+        .transition-card {
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .transition-card:hover {
+            border-color: #22C55E;
+            box-shadow: 0 0 32px rgba(34, 197, 94, 0.08);
+        }
+
+        /* ── Chart canvas responsiveness ───────────────── */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+        }
+        .chart-container canvas {
+            max-width: 100%;
+        }
+
+        /* ── Print utility ─────────────────────────────── */
+        @media print {
+            body { background: #fff !important; color: #000 !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+
+<body class="font-jakarta bg-caceena-black text-white min-h-screen overflow-x-hidden">
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- HEADER                                         -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <header class="sticky top-0 z-50 bg-caceena-black/90 backdrop-blur-md border-b border-caceena-border">
+        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <!-- Left: Brand -->
+            <div class="flex items-center gap-3 min-w-0">
+                <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-caceena-green to-caceena-lime flex items-center justify-center">
+                    <i data-lucide="bird" class="w-5 h-5 text-caceena-black"></i>
+                </div>
+                <div class="min-w-0">
+                    <h1 class="fluid-title font-extrabold tracking-tight text-white leading-tight">CACEENA-GROUP</h1>
+                    <p class="text-xs sm:text-sm text-gray-400 tracking-wide">Cockpit de Pilotage d'Élevage</p>
+                </div>
+            </div>
+
+            <!-- Right: Actions -->
+            <div class="flex items-center gap-3 flex-shrink-0">
+                <span class="hidden md:inline-flex items-center gap-1.5 text-xs text-gray-500 bg-caceena-card border border-caceena-border rounded-lg px-3 py-1.5">
+                    <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                    <span id="headerDate"></span>
+                </span>
+                <button onclick="openModal()" class="inline-flex items-center gap-2 bg-gradient-to-r from-caceena-green to-caceena-lime hover:brightness-110 text-caceena-black font-bold text-sm px-4 py-2.5 rounded-xl transition-all duration-200 shadow-lg shadow-caceena-green/20">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    <span>Nouvelle Dépense</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- MAIN CONTENT                                   -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <main class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+
+        <!-- ─── KPI CARDS ──────────────────────────── -->
+        <section aria-label="Indicateurs clés de performance" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-6 lg:mb-8">
+
+            <!-- KPI 1: Marge Économique Nette -->
+            <div class="card-glass glow-green transition-card p-5 lg:p-6 min-w-0">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2 text-gray-400 text-xs font-semibold uppercase tracking-widest">
+                        <i data-lucide="trending-up" class="w-4 h-4 text-caceena-green"></i>
+                        <span>Marge Éco. Nette</span>
+                    </div>
+                    <span class="badge-ok text-xs font-bold px-2 py-0.5 rounded-full">+12%</span>
+                </div>
+                <p class="fluid-kpi font-extrabold text-white leading-none mb-1" id="kpiMarge">1 540 000</p>
+                <p class="text-sm text-gray-400 font-medium">FCFA <span class="text-gray-600">· Cycle en cours</span></p>
+                <div class="mt-4 h-1 w-full bg-caceena-muted rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-caceena-green to-caceena-lime rounded-full" style="width: 72%;"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">72% de l'objectif de 2 150 000 FCFA</p>
+            </div>
+
+            <!-- KPI 2: Taux de Mortalité -->
+            <div class="card-glass transition-card p-5 lg:p-6 min-w-0">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2 text-gray-400 text-xs font-semibold uppercase tracking-widest">
+                        <i data-lucide="heart-pulse" class="w-4 h-4 text-red-400"></i>
+                        <span>Taux de Mortalité</span>
+                    </div>
+                    <span class="badge-warning text-xs font-bold px-2 py-0.5 rounded-full">Attention</span>
+                </div>
+                <p class="fluid-kpi font-extrabold leading-none mb-1" id="kpiMortalite">
+                    <span class="text-yellow-400">4.4</span><span class="text-yellow-400/70 text-2xl">%</span>
+                </p>
+                <p class="text-sm text-gray-400 font-medium">Seuil critique : <span class="text-red-400 font-bold">5%</span></p>
+                <div class="mt-4 h-1 w-full bg-caceena-muted rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-yellow-500 to-red-500 rounded-full" style="width: 88%;"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">1 584 pertes sur 36 000 sujets</p>
+            </div>
+
+            <!-- KPI 3: Indice de Consommation -->
+            <div class="card-glass transition-card p-5 lg:p-6 min-w-0 sm:col-span-2 lg:col-span-1">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2 text-gray-400 text-xs font-semibold uppercase tracking-widest">
+                        <i data-lucide="wheat" class="w-4 h-4 text-caceena-lime"></i>
+                        <span>Indice Consommation</span>
+                    </div>
+                    <span class="badge-ok text-xs font-bold px-2 py-0.5 rounded-full">Optimal</span>
+                </div>
+                <p class="fluid-kpi font-extrabold text-white leading-none mb-1" id="kpiIC">1.98</p>
+                <p class="text-sm text-gray-400 font-medium">Kg aliment / Kg vif</p>
+                <div class="mt-4 h-1 w-full bg-caceena-muted rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-caceena-lime to-caceena-green rounded-full" style="width: 65%;"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">Référence standard : 1.80 – 2.10</p>
+            </div>
+        </section>
+
+        <!-- ─── GRID: Chart + Alerts ───────────────── -->
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-4 lg:gap-6 mb-6 lg:mb-8">
+
+            <!-- Chart: Dépenses vs Mortalité -->
+            <div class="xl:col-span-2 card-glass transition-card p-5 lg:p-6 min-w-0">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+                    <div>
+                        <h2 class="fluid-subtitle font-bold text-white">Dépenses vs Mortalité</h2>
+                        <p class="text-xs text-gray-500 mt-0.5">Évolution sur les 4 dernières semaines</p>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-caceena-green"></span>
+                            <span class="text-gray-400">Dépenses (FCFA)</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                            <span class="text-gray-400">Mortalité (%)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container" style="height: clamp(220px, 30vw, 360px);">
+                    <canvas id="chartDepensesMortalite"></canvas>
+                </div>
+            </div>
+
+            <!-- Sidebar: Alertes Sanitaires -->
+            <div class="card-glass transition-card p-5 lg:p-6 min-w-0 flex flex-col">
+                <div class="flex items-center justify-between mb-5">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center">
+                            <i data-lucide="shield-alert" class="w-4 h-4 text-red-400"></i>
+                        </div>
+                        <h2 class="fluid-subtitle font-bold text-white">Interventions Sanitaires</h2>
+                    </div>
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="pulse-dot absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                    </span>
+                </div>
+
+                <div class="flex-1 space-y-3 overflow-y-auto pr-1" style="max-height: clamp(220px, 30vw, 360px);">
+
+                    <!-- Alert Item 1 -->
+                    <div class="bg-caceena-muted border border-caceena-border rounded-xl p-4 hover:border-red-500/30 transition-colors duration-200">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <p class="text-sm font-semibold text-white">Vaccin Newcastle (ND)</p>
+                            <span class="badge-urgent text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">URGENT</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <i data-lucide="calendar-clock" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                            <span>25 Nov 2026 — LOT-2601</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1.5">Rappel J14 — Voie oculaire, 36 000 sujets</p>
+                    </div>
+
+                    <!-- Alert Item 2 -->
+                    <div class="bg-caceena-muted border border-caceena-border rounded-xl p-4 hover:border-yellow-500/30 transition-colors duration-200">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <p class="text-sm font-semibold text-white">Vaccin Gumboro (IBD)</p>
+                            <span class="badge-warning text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">J-5</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <i data-lucide="calendar-clock" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                            <span>28 Nov 2026 — LOT-2601</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1.5">Rappel J17 — Eau de boisson</p>
+                    </div>
+
+                    <!-- Alert Item 3 -->
+                    <div class="bg-caceena-muted border border-caceena-border rounded-xl p-4 hover:border-yellow-500/30 transition-colors duration-200">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <p class="text-sm font-semibold text-white">Anticoccidien (Prévention)</p>
+                            <span class="badge-warning text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">J-8</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <i data-lucide="calendar-clock" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                            <span>01 Déc 2026 — LOT-2601</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1.5">Traitement 5 jours — Eau de boisson</p>
+                    </div>
+
+                    <!-- Alert Item 4 -->
+                    <div class="bg-caceena-muted border border-caceena-border rounded-xl p-4 hover:border-caceena-green/30 transition-colors duration-200">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <p class="text-sm font-semibold text-white">Vaccin Bronchite Inf. (IB)</p>
+                            <span class="badge-ok text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">PLANIFIÉ</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <i data-lucide="calendar-clock" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                            <span>07 Déc 2026 — LOT-2601</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1.5">Rappel J28 — Nébulisation</p>
+                    </div>
+
+                    <!-- Alert Item 5 -->
+                    <div class="bg-caceena-muted border border-caceena-border rounded-xl p-4 hover:border-caceena-green/30 transition-colors duration-200">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <p class="text-sm font-semibold text-white">Déparasitage Interne</p>
+                            <span class="badge-ok text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">PLANIFIÉ</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <i data-lucide="calendar-clock" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                            <span>14 Déc 2026 — LOT-2601</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1.5">Pipérazine — Eau de boisson, 1 jour</p>
+                    </div>
+
+                    <!-- Alert Item 6 -->
+                    <div class="bg-caceena-muted border border-caceena-border rounded-xl p-4 hover:border-caceena-green/30 transition-colors duration-200">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <p class="text-sm font-semibold text-white">Vaccin Newcastle Rappel</p>
+                            <span class="badge-ok text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">PLANIFIÉ</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <i data-lucide="calendar-clock" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                            <span>21 Déc 2026 — LOT-2602</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1.5">Rappel J42 — Injection sous-cutanée</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── TABLEAU DES BANDES (LOTS) ──────────── -->
+        <section class="card-glass transition-card p-5 lg:p-6 min-w-0 mb-6 lg:mb-8">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+                <div>
+                    <h2 class="fluid-subtitle font-bold text-white">Suivi des Bandes (Lots)</h2>
+                    <p class="text-xs text-gray-500 mt-0.5">Historique et statut de chaque lot de volailles</p>
+                </div>
+                <div class="flex items-center gap-2 text-xs">
+                    <span class="inline-flex items-center gap-1.5 text-gray-400 bg-caceena-muted border border-caceena-border rounded-lg px-3 py-1.5">
+                        <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                        <span>6 bandes</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Table Wrapper -->
+            <div class="overflow-x-auto -mx-5 lg:-mx-6 px-5 lg:px-6">
+                <table class="w-full min-w-[640px] text-sm">
+                    <thead>
+                        <tr class="border-b border-caceena-border">
+                            <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider pb-3 pr-4">Réf. Lot</th>
+                            <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider pb-3 pr-4">Qté Initiale</th>
+                            <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider pb-3 pr-4">Mortalité</th>
+                            <th class="text-right text-xs font-semibold text-gray-500 uppercase tracking-wider pb-3 pr-4">Dépenses Cumulées</th>
+                            <th class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider pb-3 pr-4">IC</th>
+                            <th class="text-center text-xs font-semibold text-gray-500 uppercase tracking-wider pb-3">Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-caceena-border/50" id="tableBody">
+                        <!-- Row 1 -->
+                        <tr class="table-row-hover transition-colors duration-150">
+                            <td class="py-3.5 pr-4">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-caceena-green/10 flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="egg" class="w-4 h-4 text-caceena-green"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">LOT-2601</p>
+                                        <p class="text-xs text-gray-500">11 Nov 2026</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 pr-4 text-gray-300 font-medium">36 000</td>
+                            <td class="py-3.5 pr-4">
+                                <span class="text-yellow-400 font-semibold">4.4%</span>
+                                <span class="text-gray-500 text-xs ml-1">(1 584)</span>
+                            </td>
+                            <td class="py-3.5 pr-4 text-right">
+                                <span class="text-white font-bold">3 460 000</span>
+                                <span class="text-gray-500 text-xs ml-1">FCFA</span>
+                            </td>
+                            <td class="py-3.5 pr-4 text-caceena-green font-semibold">1.98</td>
+                            <td class="py-3.5 text-center">
+                                <span class="badge-ok text-xs font-bold px-3 py-1 rounded-full">En cours</span>
+                            </td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr class="table-row-hover transition-colors duration-150">
+                            <td class="py-3.5 pr-4">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-gray-500/10 flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="egg" class="w-4 h-4 text-gray-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">LOT-2504</p>
+                                        <p class="text-xs text-gray-500">02 Sep 2026</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 pr-4 text-gray-300 font-medium">36 000</td>
+                            <td class="py-3.5 pr-4">
+                                <span class="text-caceena-green font-semibold">3.1%</span>
+                                <span class="text-gray-500 text-xs ml-1">(1 116)</span>
+                            </td>
+                            <td class="py-3.5 pr-4 text-right">
+                                <span class="text-white font-bold">5 120 000</span>
+                                <span class="text-gray-500 text-xs ml-1">FCFA</span>
+                            </td>
+                            <td class="py-3.5 pr-4 text-caceena-green font-semibold">1.87</td>
+                            <td class="py-3.5 text-center">
+                                <span class="badge-closed text-xs font-bold px-3 py-1 rounded-full">Clôturé</span>
+                            </td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr class="table-row-hover transition-colors duration-150">
+                            <td class="py-3.5 pr-4">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-gray-500/10 flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="egg" class="w-4 h-4 text-gray-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">LOT-2503</p>
+                                        <p class="text-xs text-gray-500">15 Juin 2026</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 pr-4 text-gray-300 font-medium">36 000</td>
+                            <td class="py-3.5 pr-4">
+                                <span class="text-red-400 font-semibold">5.8%</span>
+                                <span class="text-gray-500 text-xs ml-1">(2 088)</span>
+                            </td>
+                            <td class="py-3.5 pr-4 text-right">
+                                <span class="text-white font-bold">5 870 000</span>
+                                <span class="text-gray-500 text-xs ml-1">FCFA</span>
+                            </td>
+                            <td class="py-3.5 pr-4 text-yellow-400 font-semibold">2.14</td>
+                            <td class="py-3.5 text-center">
+                                <span class="badge-closed text-xs font-bold px-3 py-1 rounded-full">Clôturé</span>
+                            </td>
+                        </tr>
+                        <!-- Row 4 -->
+                        <tr class="table-row-hover transition-colors duration-150">
+                            <td class="py-3.5 pr-4">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-gray-500/10 flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="egg" class="w-4 h-4 text-gray-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">LOT-2502</p>
+                                        <p class="text-xs text-gray-500">28 Mar 2026</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 pr-4 text-gray-300 font-medium">36 000</td>
+                            <td class="py-3.5 pr-4">
+                                <span class="text-caceena-green font-semibold">2.9%</span>
+                                <span class="text-gray-500 text-xs ml-1">(1 044)</span>
+                            </td>
+                            <td class="py-3.5 pr-4 text-right">
+                                <span class="text-white font-bold">4 980 000</span>
+                                <span class="text-gray-500 text-xs ml-1">FCFA</span>
+                            </td>
+                            <td class="py-3.5 pr-4 text-caceena-green font-semibold">1.91</td>
+                            <td class="py-3.5 text-center">
+                                <span class="badge-closed text-xs font-bold px-3 py-1 rounded-full">Clôturé</span>
+                            </td>
+                        </tr>
+                        <!-- Row 5 -->
+                        <tr class="table-row-hover transition-colors duration-150">
+                            <td class="py-3.5 pr-4">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-gray-500/10 flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="egg" class="w-4 h-4 text-gray-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">LOT-2501</p>
+                                        <p class="text-xs text-gray-500">10 Jan 2026</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 pr-4 text-gray-300 font-medium">36 000</td>
+                            <td class="py-3.5 pr-4">
+                                <span class="text-caceena-green font-semibold">3.4%</span>
+                                <span class="text-gray-500 text-xs ml-1">(1 224)</span>
+                            </td>
+                            <td class="py-3.5 pr-4 text-right">
+                                <span class="text-white font-bold">5 240 000</span>
+                                <span class="text-gray-500 text-xs ml-1">FCFA</span>
+                            </td>
+                            <td class="py-3.5 pr-4 text-caceena-green font-semibold">1.93</td>
+                            <td class="py-3.5 text-center">
+                                <span class="badge-closed text-xs font-bold px-3 py-1 rounded-full">Clôturé</span>
+                            </td>
+                        </tr>
+                        <!-- Row 6 -->
+                        <tr class="table-row-hover transition-colors duration-150">
+                            <td class="py-3.5 pr-4">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-gray-500/10 flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="egg" class="w-4 h-4 text-gray-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">LOT-2404</p>
+                                        <p class="text-xs text-gray-500">18 Oct 2025</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3.5 pr-4 text-gray-300 font-medium">36 000</td>
+                            <td class="py-3.5 pr-4">
+                                <span class="text-caceena-green font-semibold">3.6%</span>
+                                <span class="text-gray-500 text-xs ml-1">(1 296)</span>
+                            </td>
+                            <td class="py-3.5 pr-4 text-right">
+                                <span class="text-white font-bold">4 750 000</span>
+                                <span class="text-gray-500 text-xs ml-1">FCFA</span>
+                            </td>
+                            <td class="py-3.5 pr-4 text-caceena-green font-semibold">1.95</td>
+                            <td class="py-3.5 text-center">
+                                <span class="badge-closed text-xs font-bold px-3 py-1 rounded-full">Clôturé</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ─── RÉSUMÉ FINANCIER ───────────────────── -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8">
+            <!-- Mini KPI 1 -->
+            <div class="card-glass transition-card p-4 lg:p-5 min-w-0">
+                <div class="flex items-center gap-2 text-gray-400 text-xs font-semibold uppercase tracking-wider mb-3">
+                    <i data-lucide="package" class="w-4 h-4 text-caceena-green"></i>
+                    <span>Aliments</span>
+                </div>
+                <p class="text-xl lg:text-2xl font-extrabold text-white">1 850 000</p>
+                <p class="text-xs text-gray-500 mt-1">FCFA · 53% des dépenses</p>
+            </div>
+            <!-- Mini KPI 2 -->
+            <div class="card-glass transition-card p-4 lg:p-5 min-w-0">
+                <div class="flex items-center gap-2 text-gray-400 text-xs font-semibold uppercase tracking-wider mb-3">
+                    <i data-lucide="syringe" class="w-4 h-4 text-blue-400"></i>
+                    <span>Vétérinaire</span>
+                </div>
+                <p class="text-xl lg:text-2xl font-extrabold text-white">680 000</p>
+                <p class="text-xs text-gray-500 mt-1">FCFA · 20% des dépenses</p>
+            </div>
+            <!-- Mini KPI 3 -->
+            <div class="card-glass transition-card p-4 lg:p-5 min-w-0">
+                <div class="flex items-center gap-2 text-gray-400 text-xs font-semibold uppercase tracking-wider mb-3">
+                    <i data-lucide="zap" class="w-4 h-4 text-yellow-400"></i>
+                    <span>Énergie & Eau</span>
+                </div>
+                <p class="text-xl lg:text-2xl font-extrabold text-white">430 000</p>
+                <p class="text-xs text-gray-500 mt-1">FCFA · 12% des dépenses</p>
+            </div>
+            <!-- Mini KPI 4 -->
+            <div class="card-glass transition-card p-4 lg:p-5 min-w-0">
+                <div class="flex items-center gap-2 text-gray-400 text-xs font-semibold uppercase tracking-wider mb-3">
+                    <i data-lucide="users" class="w-4 h-4 text-purple-400"></i>
+                    <span>Main d'œuvre</span>
+                </div>
+                <p class="text-xl lg:text-2xl font-extrabold text-white">500 000</p>
+                <p class="text-xs text-gray-500 mt-1">FCFA · 15% des dépenses</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- FOOTER / SIGNATURE AGENCE                      -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <footer class="border-t border-caceena-border bg-caceena-black">
+        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
+            <p class="text-sm text-gray-500">
+                Conçu par
+                <a href="https://rodis-studio.github.io/" target="_blank" rel="noopener noreferrer" class="text-caceena-green hover:text-caceena-lime font-bold transition-colors duration-200">RODIS STUDIO®</a>
+                - Lomé, Togo
+                (<a href="https://wa.me/22893095094" target="_blank" rel="noopener noreferrer" class="text-caceena-green hover:text-caceena-lime font-medium transition-colors duration-200">+228 93 09 50 94</a>)
+            </p>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- MODAL: Nouvelle Dépense                        -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="modalDepense" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+        <!-- Overlay -->
+        <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
+
+        <!-- Modal Content -->
+        <div class="relative w-full max-w-lg card-glass border-caceena-green/20 p-6 lg:p-8 z-10 shadow-2xl shadow-caceena-green/10" style="border-radius: 1.25rem;">
+            <!-- Close button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-caceena-muted hover:bg-red-500/20 flex items-center justify-center transition-colors duration-200 group">
+                <i data-lucide="x" class="w-4 h-4 text-gray-400 group-hover:text-red-400"></i>
+            </button>
+
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-caceena-green/10 flex items-center justify-center">
+                    <i data-lucide="receipt" class="w-5 h-5 text-caceena-green"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Enregistrer une Dépense</h3>
+                    <p class="text-xs text-gray-500">Ajoutez une nouvelle dépense au cycle en cours</p>
+                </div>
+            </div>
+
+            <form id="formDepense" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <!-- Lot -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Lot concerné</label>
+                    <select required class="w-full bg-caceena-muted border border-caceena-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-caceena-green focus:ring-1 focus:ring-caceena-green transition-colors duration-200 appearance-none">
+                        <option value="" disabled selected>Sélectionner un lot</option>
+                        <option value="LOT-2601">LOT-2601 (En cours)</option>
+                        <option value="LOT-2504">LOT-2504 (Clôturé)</option>
+                        <option value="LOT-2503">LOT-2503 (Clôturé)</option>
+                    </select>
+                </div>
+
+                <!-- Category -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Catégorie</label>
+                    <select required class="w-full bg-caceena-muted border border-caceena-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-caceena-green focus:ring-1 focus:ring-caceena-green transition-colors duration-200 appearance-none">
+                        <option value="" disabled selected>Type de dépense</option>
+                        <option value="aliment">Aliments</option>
+                        <option value="veterinaire">Vétérinaire / Santé</option>
+                        <option value="energie">Énergie & Eau</option>
+                        <option value="main-oeuvre">Main d'œuvre</option>
+                        <option value="equipement">Équipement</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+
+                <!-- Amount -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Montant (FCFA)</label>
+                    <input type="number" required min="0" step="500" placeholder="Ex: 250 000"
+                        class="w-full bg-caceena-muted border border-caceena-border rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-caceena-green focus:ring-1 focus:ring-caceena-green transition-colors duration-200">
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Description <span class="text-gray-600 normal-case">(optionnel)</span></label>
+                    <textarea rows="2" placeholder="Détail de la dépense..."
+                        class="w-full bg-caceena-muted border border-caceena-border rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-caceena-green focus:ring-1 focus:ring-caceena-green transition-colors duration-200 resize-none"></textarea>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-caceena-green to-caceena-lime hover:brightness-110 text-caceena-black font-bold text-sm py-3.5 rounded-xl transition-all duration-200 shadow-lg shadow-caceena-green/20 flex items-center justify-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                    <span>Valider la Dépense</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- TOAST NOTIFICATION                             -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="toast" class="fixed bottom-6 right-6 z-[200] hidden">
+        <div class="card-glass border-caceena-green/30 glow-green px-5 py-3.5 flex items-center gap-3 shadow-2xl" style="border-radius: 0.875rem;">
+            <div class="w-8 h-8 rounded-lg bg-caceena-green/20 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check-circle" class="w-4 h-4 text-caceena-green"></i>
+            </div>
+            <div>
+                <p class="text-sm font-semibold text-white">Dépense enregistrée</p>
+                <p class="text-xs text-gray-400">Le tableau de bord a été mis à jour</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- JAVASCRIPT                                     -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <script>
+        // ─── Initialize Lucide Icons ──────────────────
+        document.addEventListener('DOMContentLoaded', function () {
+            lucide.createIcons();
+            setHeaderDate();
+            initChart();
+        });
+
+        // ─── Header Date ──────────────────────────────
+        function setHeaderDate() {
+            var el = document.getElementById('headerDate');
+            if (!el) return;
+            var now = new Date();
+            var options = { day: '2-digit', month: 'short', year: 'numeric' };
+            el.textContent = now.toLocaleDateString('fr-FR', options);
+        }
+
+        // ─── Modal Controls ──────────────────────────
+        function openModal() {
+            var modal = document.getElementById('modalDepense');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('modalDepense');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ─── Form Submission ─────────────────────────
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            closeModal();
+            showToast();
+            // Reset form
+            document.getElementById('formDepense').reset();
+        }
+
+        // ─── Toast Notification ──────────────────────
+        function showToast() {
+            var toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            // Re-initialize Lucide icons in the toast
+            lucide.createIcons();
+
+            setTimeout(function () {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+
+        // ─── Chart.js: Dépenses vs Mortalité ────────
+        function initChart() {
+            var ctx = document.getElementById('chartDepensesMortalite');
+            if (!ctx) return;
+
+            var gradient1 = ctx.getContext('2d').createLinearGradient(0, 0, 0, 350);
+            gradient1.addColorStop(0, 'rgba(34, 197, 94, 0.25)');
+            gradient1.addColorStop(1, 'rgba(34, 197, 94, 0.0)');
+
+            var gradient2 = ctx.getContext('2d').createLinearGradient(0, 0, 0, 350);
+            gradient2.addColorStop(0, 'rgba(248, 113, 113, 0.20)');
+            gradient2.addColorStop(1, 'rgba(248, 113, 113, 0.0)');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Semaine 1', 'Semaine 2', 'Semaine 3', 'Semaine 4'],
+                    datasets: [
+                        {
+                            label: 'Dépenses (FCFA)',
+                            data: [720000, 850000, 1120000, 770000],
+                            borderColor: '#22C55E',
+                            backgroundColor: gradient1,
+                            borderWidth: 2.5,
+                            tension: 0.4,
+                            fill: true,
+                            pointBackgroundColor: '#22C55E',
+                            pointBorderColor: '#0A1910',
+                            pointBorderWidth: 2,
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            yAxisID: 'y',
+                        },
+                        {
+                            label: 'Mortalité (%)',
+                            data: [1.1, 1.0, 1.4, 0.9],
+                            borderColor: '#f87171',
+                            backgroundColor: gradient2,
+                            borderWidth: 2.5,
+                            tension: 0.4,
+                            fill: true,
+                            pointBackgroundColor: '#f87171',
+                            pointBorderColor: '#0A1910',
+                            pointBorderWidth: 2,
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            yAxisID: 'y1',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        tooltip: {
+                            backgroundColor: '#0A1910',
+                            titleColor: '#ffffff',
+                            bodyColor: '#d1d5db',
+                            borderColor: '#16291E',
+                            borderWidth: 1,
+                            padding: 12,
+                            cornerRadius: 12,
+                            titleFont: {
+                                family: "'Plus Jakarta Sans', sans-serif",
+                                size: 13,
+                                weight: '700',
+                            },
+                            bodyFont: {
+                                family: "'Plus Jakarta Sans', sans-serif",
+                                size: 12,
+                            },
+                            callbacks: {
+                                label: function (context) {
+                                    if (context.datasetIndex === 0) {
+                                        return 'Dépenses : ' + context.parsed.y.toLocaleString('fr-FR') + ' FCFA';
+                                    }
+                                    return 'Mortalité : ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(22, 41, 30, 0.5)',
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                color: '#6b7280',
+                                font: {
+                                    family: "'Plus Jakarta Sans', sans-serif",
+                                    size: 11,
+                                    weight: '500',
+                                },
+                            },
+                            border: {
+                                display: false,
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            grid: {
+                                color: 'rgba(22, 41, 30, 0.5)',
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                color: '#22C55E',
+                                font: {
+                                    family: "'Plus Jakarta Sans', sans-serif",
+                                    size: 11,
+                                    weight: '500',
+                                },
+                                callback: function (value) {
+                                    if (value >= 1000000) {
+                                        return (value / 1000000).toFixed(1) + 'M';
+                                    }
+                                    if (value >= 1000) {
+                                        return (value / 1000).toFixed(0) + 'K';
+                                    }
+                                    return value;
+                                }
+                            },
+                            border: {
+                                display: false,
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                            ticks: {
+                                color: '#f87171',
+                                font: {
+                                    family: "'Plus Jakarta Sans', sans-serif",
+                                    size: 11,
+                                    weight: '500',
+                                },
+                                callback: function (value) {
+                                    return value + '%';
+                                }
+                            },
+                            border: {
+                                display: false,
+                            },
+                            min: 0,
+                            max: 3,
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
